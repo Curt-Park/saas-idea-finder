@@ -18,7 +18,7 @@ from ..agents.successful_project_researcher import SuccessfulProjectResearcherAg
 
 
 class SaasIdeaFinderCrew:
-    def __init__(self):
+    def __init__(self, model: str = "gpt-4o-mini", temperature: float = 0.3):
         # Load environment variables
         load_dotenv()
 
@@ -27,13 +27,17 @@ class SaasIdeaFinderCrew:
         if not self.openai_api_key:
             raise ValueError("OPENAI_API_KEY environment variable is not set.")
 
+        # Store model and temperature settings
+        self.model = model
+        self.temperature = temperature
+
         # Initialize agents for successful project analysis
-        self.reddit_trend_analyzer = RedditTrendAnalyzerAgent(self.openai_api_key)
-        self.successful_project_researcher = SuccessfulProjectResearcherAgent(self.openai_api_key)
-        self.competitive_landscape_analyzer = CompetitiveLandscapeAnalyzerAgent(self.openai_api_key)
-        self.mvp_feature_suggester = MvpFeatureSuggesterAgent(self.openai_api_key)
-        self.problem_analyzer = ProblemAnalyzerAgent(self.openai_api_key)
-        self.revenue_analyzer = RevenueAnalyzerAgent(self.openai_api_key)
+        self.reddit_trend_analyzer = RedditTrendAnalyzerAgent(self.openai_api_key, model, temperature)
+        self.successful_project_researcher = SuccessfulProjectResearcherAgent(self.openai_api_key, model, temperature)
+        self.competitive_landscape_analyzer = CompetitiveLandscapeAnalyzerAgent(self.openai_api_key, model, temperature)
+        self.mvp_feature_suggester = MvpFeatureSuggesterAgent(self.openai_api_key, model, temperature)
+        self.problem_analyzer = ProblemAnalyzerAgent(self.openai_api_key, model, temperature)
+        self.revenue_analyzer = RevenueAnalyzerAgent(self.openai_api_key, model, temperature)
 
         # Crew setup for successful project analysis
         self.crew = Crew(

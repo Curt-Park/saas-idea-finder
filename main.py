@@ -1,5 +1,6 @@
 """SaaS Idea Finder Main Execution Script."""
 
+import argparse
 import os
 import sys
 from datetime import datetime
@@ -11,6 +12,18 @@ from src import SaasIdeaFinderCrew
 
 def main():
     """Main execution function"""
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description="SaaS Idea Finder - Multi-agent tool for analyzing SaaS opportunities")
+    parser.add_argument(
+        "--model",
+        type=str,
+        default="gpt-4o-mini",
+        help="OpenAI model to use (default: gpt-4o-mini). Options: gpt-4o-mini, gpt-4o, gpt-4-turbo, gpt-3.5-turbo",
+    )
+    parser.add_argument("--temperature", type=float, default=0.3, help="Temperature for model generation (default: 0.3)")
+
+    args = parser.parse_args()
+
     # Load environment variables
     load_dotenv()
 
@@ -29,9 +42,9 @@ def main():
         print("export SERPER_API_KEY='your-serper-api-key'")
 
     try:
-        # Initialize crew
-        print("🤖 Initializing SaaS Idea Finder crew...")
-        crew = SaasIdeaFinderCrew()
+        # Initialize crew with specified model
+        print(f"🤖 Initializing SaaS Idea Finder crew with model: {args.model}...")
+        crew = SaasIdeaFinderCrew(model=args.model, temperature=args.temperature)
 
         # Successful Project Analysis
         print("\n" + "=" * 50)

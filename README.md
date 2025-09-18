@@ -193,12 +193,39 @@ SERPER_API_KEY=your-serper-api-key-here
 
 4. **Run Analysis**:
    ```bash
+   # Use default model (gpt-4o-mini)
    python main.py
+   
+   # Use specific model
+   python main.py --model gpt-4o
+   
+   # Use custom temperature
+   python main.py --model gpt-4o-mini --temperature 0.5
    ```
 
 5. **Check Results**:
    - Reports saved in `report/` directory
    - Markdown (.md) format with professional formatting
+
+### Command Line Options
+
+The tool supports various command line options for customization:
+
+```bash
+# Show help
+python main.py --help
+
+# Use different OpenAI models
+python main.py --model gpt-4o          # Most capable model
+python main.py --model gpt-4o-mini     # Cost-effective default
+python main.py --model gpt-4-turbo     # Balanced option
+python main.py --model gpt-3.5-turbo   # Fastest option
+
+# Adjust creativity/temperature
+python main.py --temperature 0.1       # More focused/consistent
+python main.py --temperature 0.7      # More creative/varied
+python main.py --temperature 1.0      # Maximum creativity
+```
 
 ## 🎯 Usage
 
@@ -298,6 +325,19 @@ A: No, the tool only processes Reddit data in memory and doesn't store it perman
 
 **Q: Can I run this on a schedule?**
 A: Yes, you can set up a cron job or use GitHub Actions to run the analysis automatically. Be mindful of API rate limits.
+
+**Q: Which OpenAI model should I use?**
+A: 
+- **gpt-4o-mini** (default): Best balance of cost and quality, recommended for most users
+- **gpt-4o**: Highest quality but more expensive, use for critical analyses
+- **gpt-4-turbo**: Good balance between speed and quality
+- **gpt-3.5-turbo**: Fastest and cheapest, but lower quality results
+
+**Q: What temperature setting should I use?**
+A:
+- **0.1-0.3** (default): More focused and consistent results, recommended for analysis
+- **0.5-0.7**: Balanced creativity and consistency
+- **0.8-1.0**: More creative and varied results, use with caution for analysis tasks
 
 ## 🔧 Development Tools
 

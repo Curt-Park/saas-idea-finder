@@ -10,8 +10,8 @@ from langchain_openai import ChatOpenAI
 
 
 class MvpFeatureSuggesterAgent:
-    def __init__(self, openai_api_key: str):
-        self.llm = ChatOpenAI(model="gpt-4o-mini", api_key=openai_api_key, temperature=0.7)
+    def __init__(self, openai_api_key: str, model: str = "gpt-4o-mini", temperature: float = 0.3):
+        self.llm = ChatOpenAI(model=model, api_key=openai_api_key, temperature=temperature)
 
         self.agent = Agent(
             role="MVP Feature Suggestion Expert",
