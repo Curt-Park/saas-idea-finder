@@ -5,7 +5,7 @@ A multi-agent tool built with crewAI that comprehensively analyzes the market po
 ## 🚀 Key Features
 
 1. **Reddit Trend Analysis**: Analyzes Reddit communities to identify trending pain points and opportunities with detailed references and dates
-2. **Successful Project Research**: Researches and analyzes recent successful micro-SaaS projects (launched within 2-3 years) with launch dates and growth trajectories
+2. **Successful Project Research**: Researches and analyzes recent successful micro-SaaS projects (launched within 1-2 years) with launch dates and growth trajectories
 3. **Competitive Landscape Analysis**: Analyzes existing services to identify gaps and improvement opportunities
 4. **MVP Feature Suggestions**: Suggests specific features to differentiate from competitors
 5. **Problem Analysis**: Identifies key problems to solve for implementing suggested features
