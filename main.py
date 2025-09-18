@@ -2,6 +2,7 @@
 
 import os
 import sys
+from datetime import datetime
 
 from dotenv import load_dotenv
 
@@ -32,22 +33,16 @@ def main():
         print("🤖 Initializing SaaS Idea Finder crew...")
         crew = SaasIdeaFinderCrew()
 
-        # User input
+        # Successful Project Analysis
         print("\n" + "=" * 50)
         print("🚀 Welcome to SaaS Idea Finder!")
         print("=" * 50)
-
-        topic = input("\n📝 Please enter the topic or idea you want to analyze: ").strip()
-
-        if not topic:
-            print("❌ Please enter a topic.")
-            sys.exit(1)
-
-        print(f"\n🔍 Starting comprehensive analysis for '{topic}'...")
+        print("\n💰 Starting successful project analysis...")
+        print("⏳ This will analyze Reddit trends, research successful projects, and suggest improvements...")
         print("⏳ Analysis may take several minutes.")
 
-        # Execute analysis
-        result = crew.analyze_saas_idea(topic)
+        # Execute successful project analysis
+        result = crew.analyze_successful_projects()
 
         # Print the result
         print("\n" + "=" * 50)
@@ -58,12 +53,19 @@ def main():
         summary = crew.generate_summary_report(result)
         print(summary)
 
-        # Save results to file
-        output_file = f"analysis_result_{topic.replace(' ', '_')}.md"
-        with open(output_file, "w", encoding="utf-8") as f:
+        # Create report directory if it doesn't exist
+        report_dir = "report"
+        os.makedirs(report_dir, exist_ok=True)
+
+        # Generate timestamp-based filename
+        timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+        md_file = os.path.join(report_dir, f"{timestamp}.md")
+
+        # Save markdown file
+        with open(md_file, "w", encoding="utf-8") as f:
             f.write(summary)
 
-        print(f"\n💾 Detailed results saved to '{output_file}' file.")
+        print(f"\n💾 Detailed results saved to: '{md_file}'")
 
     except Exception as e:
         print(f"❌ An error occurred: {str(e)}")
