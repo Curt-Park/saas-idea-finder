@@ -47,54 +47,23 @@ class CompetitiveLandscapeAnalyzerAgent:
             A. If successful projects were found: Analyze their competitive landscape
             B. If no successful projects found: Analyze Reddit pain points and suggest service ideas
             
-            For each successful project identified, perform detailed competitive analysis:
+            For each successful project identified, provide a COMPACT analysis with these sections:
             
-            1. Service Overview Analysis:
-               - Core functionality and features
-               - Target market and user personas
-               - Business model and pricing
-               - Market positioning and messaging
-               - Brand and design approach
-            
-            2. Strengths Analysis:
+            **For Each Service:**
+            1. **Strengths** (2-3 key points):
                - Unique value propositions
-               - Key differentiators
-               - User experience advantages
-               - Technical capabilities
-               - Market recognition and reputation
-               - Customer loyalty factors
+               - Key competitive advantages
+               - Market recognition factors
             
-            3. Weaknesses Analysis:
+            2. **Weaknesses** (2-3 key points):
                - Feature limitations or gaps
-               - User interface issues
-               - Performance or reliability problems
-               - Pricing concerns
-               - Customer support issues
-               - Integration limitations
+               - User experience issues
+               - Pricing or support concerns
             
-            4. Market Opportunity Assessment:
+            3. **Market Opportunities and Gaps** (2-3 key points):
                - Underserved customer segments
                - Feature gaps in the market
-               - Pricing opportunities
-               - Geographic expansion potential
-               - Vertical market opportunities
-               - Integration possibilities
-            
-            5. Competitive Positioning:
-               - Market share and growth trajectory
-               - Customer acquisition strategies
-               - Marketing and branding approach
-               - Partnership and integration strategies
-               - Innovation and development pace
-               - Customer retention strategies
-            
-            6. Improvement Opportunities:
-               - Feature enhancements needed
-               - User experience improvements
-               - Pricing model optimizations
-               - Market expansion opportunities
-               - Technology upgrades
-               - Customer service improvements
+               - Pricing or geographic opportunities
             
             Focus on identifying:
             - Services with high revenue but significant user complaints
@@ -132,15 +101,15 @@ class CompetitiveLandscapeAnalyzerAgent:
             agent=self.agent,
             expected_output="""
             Competitive Landscape Analysis Report:
-            1. Service overview and positioning (if services found)
-            2. Strengths and competitive advantages (if services found)
-            3. Weaknesses and improvement areas (if services found)
-            4. Market opportunities and gaps
-            5. Competitive positioning analysis (if services found)
-            6. Improvement opportunity matrix
-            7. Market entry strategy recommendations
-            8. Service idea suggestions (if no existing services found)
-            9. Reddit pain point analysis and market gap identification
+            For each service (if found):
+            1. **Service Name**: Brief overview
+            2. **Strengths**: 2-3 key competitive advantages
+            3. **Weaknesses**: 2-3 key limitations or gaps
+            4. **Market Opportunities and Gaps**: 2-3 key opportunities
+            
+            If no services found:
+            1. **Reddit Pain Point Analysis**: Key pain points identified
+            2. **Service Idea Suggestions**: 2-3 potential service ideas with brief descriptions
             """,
         )
 

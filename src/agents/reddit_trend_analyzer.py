@@ -3,6 +3,7 @@
 Analyzes Reddit communities to identify trending topics and pain points for SaaS opportunities.
 """
 
+import asyncio
 from typing import Any
 
 from crewai import Agent, Task
@@ -117,27 +118,30 @@ class RedditTrendAnalyzerAgent:
             """,
         )
 
-    def analyze_reddit_trends(self) -> dict[str, Any]:
-        """Execute Reddit trend analysis."""
-        print("🔍 Collecting Reddit data...")
+    async def analyze_reddit_trends_async(self) -> dict[str, Any]:
+        """Execute Reddit trend analysis asynchronously."""
+        print("🔍 Collecting Reddit data asynchronously...")
 
-        # Collect Reddit data
+        # Run all scraping operations concurrently
+        hot_posts_task = self.reddit_scraper.scrape_hot_posts_async(limit_per_subreddit=10)
+        weekly_top_posts_task = self.reddit_scraper.scrape_weekly_top_posts_async(limit_per_subreddit=10)
+        pain_point_posts_task = self.reddit_scraper.get_pain_point_posts_async(limit_per_subreddit=10)
+        
+        # Wait for all tasks to complete
+        hot_posts, weekly_top_posts, pain_point_posts = await asyncio.gather(
+            hot_posts_task,
+            weekly_top_posts_task,
+            pain_point_posts_task,
+            return_exceptions=True
+        )
+        
+        # Handle any exceptions
         reddit_data = {}
-
-        # Get hot posts (reduced limit for token optimization)
-        print("📊 Scraping hot posts...")
-        hot_posts = self.reddit_scraper.scrape_hot_posts(limit_per_subreddit=10)
-        reddit_data["hot_posts"] = hot_posts
-
-        # Get weekly top posts (reduced limit for token optimization)
-        print("📊 Scraping weekly top posts...")
-        weekly_top_posts = self.reddit_scraper.scrape_weekly_top_posts(limit_per_subreddit=10)
-        reddit_data["weekly_top_posts"] = weekly_top_posts
-
-        # Get pain point posts (reduced limit for token optimization)
-        print("🔍 Searching for pain points...")
-        pain_point_posts = self.reddit_scraper.get_pain_point_posts(limit_per_subreddit=10)
-        reddit_data["pain_point_posts"] = pain_point_posts
+        reddit_data["hot_posts"] = hot_posts if not isinstance(hot_posts, Exception) else {}
+        reddit_data["weekly_top_posts"] = weekly_top_posts if not isinstance(weekly_top_posts, Exception) else {}
+        reddit_data["pain_point_posts"] = pain_point_posts if not isinstance(pain_point_posts, Exception) else {}
+        
+        print("✅ Reddit data collection completed")
 
         # Create analysis task with real data
         task = self.create_reddit_trend_analysis_task(reddit_data)
@@ -146,3 +150,7 @@ class RedditTrendAnalyzerAgent:
         result = self.agent.execute_task(task)
 
         return {"reddit_trend_analysis": result, "reddit_data": reddit_data, "status": "completed"}
+
+    def analyze_reddit_trends(self) -> dict[str, Any]:
+        """Execute Reddit trend analysis (sync wrapper)."""
+        return asyncio.run(self.analyze_reddit_trends_async())

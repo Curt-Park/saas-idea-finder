@@ -33,91 +33,31 @@ class MvpFeatureSuggesterAgent:
             
             Competitive analysis data: {competitive_data}
             
-            For each service analyzed, suggest MVP features that could create a competitive advantage:
+            For each service analyzed, provide COMPACT MVP feature suggestions:
             
-            1. Core Feature Enhancements:
+            **For Each Service:**
+            1. **Core Feature Enhancements** (2-3 key features):
                - Essential features that address main pain points
                - User experience improvements
                - Performance optimizations
-               - Integration capabilities
-               - Mobile responsiveness
             
-            2. Differentiation Features:
-               - Unique value propositions
-               - Innovative functionality
-               - Better user interface design
-               - Advanced automation features
-               - AI-powered capabilities
+            2. **Enhancement Rationale** (brief justification):
+               - Why these features are needed
+               - How they address competitive weaknesses
+               - Market opportunity they create
             
-            3. Market-Specific Features:
-               - Industry-specific functionality
-               - Localization and regional features
-               - Compliance and security features
-               - Integration with popular tools
-               - Customization options
-            
-            4. Technical Improvements:
-               - Modern technology stack
-               - Better API design
-               - Real-time capabilities
-               - Scalability improvements
-               - Security enhancements
-            
-            5. Business Model Innovations:
-               - Flexible pricing options
-               - Freemium features
-               - White-label solutions
-               - Partnership opportunities
-               - Revenue sharing models
-            
-            MVP Feature Prioritization:
-            
-            High Priority (Must Have):
-            - Core functionality that solves the main problem
-            - Essential user experience features
-            - Basic integration capabilities
-            - Security and reliability features
-            - Simple pricing model
-            
-            Medium Priority (Should Have):
-            - Advanced features that differentiate
-            - Mobile app or responsive design
-            - Analytics and reporting
-            - Customer support features
-            - Marketing and onboarding tools
-            
-            Low Priority (Nice to Have):
-            - Advanced automation
-            - AI-powered features
-            - Advanced integrations
-            - White-label options
-            - Enterprise features
-            
-            For each suggested MVP:
-            - Feature description and benefits
-            - Implementation complexity (1-10 scale)
-            - Development time estimate
-            - Required technical skills
-            - Market validation approach
-            - Revenue potential assessment
-            
-            Deliverables:
-            - MVP feature suggestions for each service
-            - Prioritized feature roadmap
-            - Implementation complexity analysis
-            - Market validation strategies
-            - Revenue potential estimates
+            Focus on:
+            - Features that directly address competitive weaknesses
+            - Simple, implementable improvements
+            - Clear market differentiation
+            - Solopreneur-friendly development scope
             """,
             agent=self.agent,
             expected_output="""
             MVP Feature Suggestion Report:
-            1. Core feature enhancements for each service
-            2. Differentiation features and unique value props
-            3. Market-specific feature recommendations
-            4. Technical improvement suggestions
-            5. Business model innovations
-            6. Prioritized MVP feature roadmap
-            7. Implementation complexity and timeline estimates
+            For each service:
+            1. **Core Feature Enhancements**: 2-3 key features with brief descriptions
+            2. **Enhancement Rationale**: Why these features are needed and how they address competitive weaknesses
             """,
         )
 
