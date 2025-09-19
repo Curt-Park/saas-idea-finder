@@ -4,6 +4,7 @@ Orchestrates all agents to perform comprehensive SaaS idea analysis.
 """
 
 import os
+import time
 from typing import Any
 
 from crewai import Crew, Process
@@ -61,33 +62,58 @@ class SaasIdeaFinderCrew:
             Comprehensive analysis of successful projects with improvement suggestions
         """
         print("🔍 Starting successful project analysis...")
+        
+        # Initialize timing tracking
+        step_times = {}
+        total_start_time = time.time()
 
         # Step 1: Reddit trend analysis
         print("📱 Step 1: Analyzing Reddit trends and pain points...")
+        step_start = time.time()
         reddit_result = self.reddit_trend_analyzer.analyze_reddit_trends()
+        step_times["reddit_analysis"] = time.time() - step_start
+        print(f"⏱️  Reddit analysis completed in {step_times['reddit_analysis']:.1f} seconds")
 
         # Step 2: Research successful projects (using Reddit trend analysis summary)
         print("💰 Step 2: Researching successful micro-SaaS projects based on Reddit trends...")
+        step_start = time.time()
         successful_projects = self.successful_project_researcher.research_successful_projects(
             reddit_result["reddit_trend_analysis"]
         )
-        print("✅ Successful projects research completed")
+        step_times["successful_projects_research"] = time.time() - step_start
+        print(f"⏱️  Successful projects research completed in {step_times['successful_projects_research']:.1f} seconds")
 
         # Step 3: Competitive landscape analysis
         print("🏢 Step 3: Analyzing competitive landscape...")
+        step_start = time.time()
         competitive_result = self.competitive_landscape_analyzer.analyze_competitive_landscape(successful_projects)
+        step_times["competitive_analysis"] = time.time() - step_start
+        print(f"⏱️  Competitive analysis completed in {step_times['competitive_analysis']:.1f} seconds")
 
         # Step 4: MVP feature suggestions
         print("💡 Step 4: Suggesting MVP features for improvements...")
+        step_start = time.time()
         mvp_result = self.mvp_feature_suggester.suggest_mvp_features(competitive_result)
+        step_times["mvp_suggestions"] = time.time() - step_start
+        print(f"⏱️  MVP suggestions completed in {step_times['mvp_suggestions']:.1f} seconds")
 
         # Step 5: Problem analysis
         print("🔧 Step 5: Analyzing implementation problems...")
+        step_start = time.time()
         problem_result = self.problem_analyzer.analyze_problems(mvp_result)
+        step_times["problem_analysis"] = time.time() - step_start
+        print(f"⏱️  Problem analysis completed in {step_times['problem_analysis']:.1f} seconds")
 
         # Step 6: Revenue analysis
         print("📊 Step 6: Analyzing revenue potential...")
+        step_start = time.time()
         revenue_result = self.revenue_analyzer.analyze_revenue(problem_result)
+        step_times["revenue_analysis"] = time.time() - step_start
+        print(f"⏱️  Revenue analysis completed in {step_times['revenue_analysis']:.1f} seconds")
+
+        # Calculate total time
+        total_time = time.time() - total_start_time
+        step_times["total_time"] = total_time
 
         # Return comprehensive results
         final_result = {
@@ -97,10 +123,11 @@ class SaasIdeaFinderCrew:
             "mvp_suggestions": mvp_result,
             "problem_analysis": problem_result,
             "revenue_analysis": revenue_result,
+            "step_times": step_times,
             "status": "completed",
         }
 
-        print("✅ Successful project analysis completed!")
+        print(f"✅ Successful project analysis completed in {total_time:.1f} seconds!")
         return final_result
 
     def generate_summary_report(self, analysis_result: dict[str, Any]) -> str:
@@ -114,6 +141,30 @@ class SaasIdeaFinderCrew:
         """
         from datetime import datetime
 
+        # Get timing information
+        step_times = analysis_result.get("step_times", {})
+        total_time = step_times.get("total_time", 0)
+        
+        # Format timing information
+        timing_section = ""
+        if step_times:
+            timing_section = f"""
+## ⏱️ Analysis Performance
+
+### Step-by-Step Timing
+- **Reddit Trend Analysis**: {step_times.get('reddit_analysis', 0):.1f} seconds
+- **Successful Projects Research**: {step_times.get('successful_projects_research', 0):.1f} seconds
+- **Competitive Landscape Analysis**: {step_times.get('competitive_analysis', 0):.1f} seconds
+- **MVP Feature Suggestions**: {step_times.get('mvp_suggestions', 0):.1f} seconds
+- **Problem Analysis**: {step_times.get('problem_analysis', 0):.1f} seconds
+- **Revenue Analysis**: {step_times.get('revenue_analysis', 0):.1f} seconds
+
+### Total Analysis Time
+- **Overall Duration**: {total_time:.1f} seconds ({total_time/60:.1f} minutes)
+- **Average Step Time**: {total_time/6:.1f} seconds per step
+
+"""
+
         report = f"""
 # Successful Project Analysis Report
 
@@ -121,7 +172,9 @@ class SaasIdeaFinderCrew:
 - **Analysis Type**: Successful Project Analysis
 - **Focus**: Analyzing successful micro-SaaS projects and suggesting improvements
 - **Analysis Date**: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+- **Total Processing Time**: {total_time:.1f} seconds ({total_time/60:.1f} minutes)
 
+{timing_section}
 ## 🎯 Key Findings
 
 ### 1. Reddit Trend Analysis
