@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS Idea Finder - Daily Reports</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        .pagination {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .pagination h3 {
+            margin: 0 0 15px 0;
+            color: #333;
+        }
+        .page-numbers {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .page-number {
+            display: inline-block;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #495057;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .page-number:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        .page-number.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        .report-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .report-card h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        .report-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .download-btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        .download-btn:hover {
+            background: #5a6fd8;
+        }
+        .footer {
+            text-align: center;
+            color: #666;
+            margin-top: 40px;
+            padding: 20px;
+        }
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .report-content {
+            display: none;
+        }
+        .report-content.active {
+            display: block;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 SaaS Idea Finder</h1>
+        <p>Daily AI-powered SaaS opportunity analysis</p>
+    </div>
+    
+    <div class="pagination">
+        <h3>📊 Select Report</h3>
+        <div class="page-numbers" id="pageNumbers">
+            <div class="loading">Loading reports...</div>
+        </div>
+    </div>
+    
+    <div class="report-card" id="reportContent">
+        <div class="loading">Select a report to view</div>
+    </div>
+    
+    <div class="footer">
+        <p>🤖 Powered by AI Agents | Updated Daily at Midnight UTC</p>
+        <p><a href="https://github.com/Curt-Park/saas-idea-finder">View Source Code</a></p>
+    </div>
+    
+    <script>
+        let totalReports = 0;
+        let currentPage = 1;
+        
+        // Load total reports count
+        async function loadTotalReports() {
+            try {
+                const response = await fetch('total-reports.txt');
+                if (response.ok) {
+                    const text = await response.text();
+                    totalReports = parseInt(text.trim());
+                    generatePageNumbers();
+                } else {
+                    // Fallback: try to load latest report
+                    totalReports = 1;
+                    generatePageNumbers();
+                }
+            } catch (error) {
+                console.error('Error loading total reports:', error);
+                totalReports = 1;
+                generatePageNumbers();
+            }
+        }
+        
+        // Generate page number buttons
+        function generatePageNumbers() {
+            const container = document.getElementById('pageNumbers');
+            container.innerHTML = '';
+            
+            for (let i = 1; i <= totalReports; i++) {
+                const pageBtn = document.createElement('div');
+                pageBtn.className = 'page-number';
+                pageBtn.textContent = i;
+                pageBtn.onclick = () => loadReport(i);
+                container.appendChild(pageBtn);
+            }
+            
+            // Load the first report by default
+            if (totalReports > 0) {
+                loadReport(1);
+            }
+        }
+        
+        // Load report content
+        async function loadReport(pageNumber) {
+            currentPage = pageNumber;
+            
+            // Update active page button
+            document.querySelectorAll('.page-number').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.page-number')[pageNumber - 1]?.classList.add('active');
+            
+            // Show loading
+            const content = document.getElementById('reportContent');
+            content.innerHTML = '<div class="loading">Loading report...</div>';
+            
+            try {
+                const reportFile = pageNumber === 1 ? 'latest-report.md' : `report-${pageNumber}.md`;
+                const response = await fetch(reportFile);
+                
+                if (response.ok) {
+                    const markdown = await response.text();
+                    const html = await convertMarkdownToHtml(markdown);
+                    content.innerHTML = html;
+                } else {
+                    content.innerHTML = '<div class="loading">Report not found</div>';
+                }
+            } catch (error) {
+                console.error('Error loading report:', error);
+                content.innerHTML = '<div class="loading">Error loading report</div>';
+            }
+        }
+        
+        // Simple markdown to HTML converter
+        async function convertMarkdownToHtml(markdown) {
+            // Basic markdown conversion
+            let html = markdown
+                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                .replace(/^#### (.*$)/gim, '<h4>$1</h4>')
+                .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+                .replace(/\*(.*)\*/gim, '<em>$1</em>')
+                .replace(/^- (.*$)/gim, '<li>$1</li>')
+                .replace(/^\d+\. (.*$)/gim, '<li>$1</li>')
+                .replace(/\n\n/gim, '</p><p>')
+                .replace(/\n/gim, '<br>');
+            
+            // Wrap in paragraphs
+            html = '<p>' + html + '</p>';
+            
+            // Fix list items
+            html = html.replace(/<li>(.*?)<\/li>/gim, '<ul><li>$1</li></ul>');
+            html = html.replace(/<\/ul><ul>/gim, '');
+            
+            return html;
+        }
+        
+        // Initialize
+        loadTotalReports();
+    </script>
+</body>
+</html>
