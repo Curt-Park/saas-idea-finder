@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SaaS Idea Finder - Daily Reports</title>
+    <!-- marked.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -75,49 +77,11 @@
             margin-bottom: 20px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .report-card h2 {
-            color: #333;
-            margin-top: 0;
-        }
-        .report-card p {
-            color: #666;
-            line-height: 1.6;
-        }
-        .download-btn {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 15px;
-            transition: background 0.3s;
-        }
-        .download-btn:hover {
-            background: #5a6fd8;
-        }
         .footer {
             text-align: center;
             color: #666;
             margin-top: 40px;
             padding: 20px;
-        }
-        .status {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            font-weight: 500;
-        }
-        .status.success {
-            background: #d4edda;
-            color: #155724;
-        }
-        .report-content {
-            display: none;
-        }
-        .report-content.active {
-            display: block;
         }
         .loading {
             text-align: center;
@@ -125,72 +89,72 @@
             color: #666;
         }
         
-        /* 마크다운 스타일링 */
+        /* GitHub 스타일 마크다운 */
         .markdown-content {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.7;
-            color: #333;
+            color: #24292e;
         }
         
         .markdown-content h1 {
-            font-size: 2.2em;
-            font-weight: 700;
-            margin: 1.5em 0 0.8em 0;
+            font-size: 2em;
+            font-weight: 600;
+            margin: 1.5em 0 0.5em 0;
             padding-bottom: 0.3em;
-            border-bottom: 2px solid #eaecef;
+            border-bottom: 1px solid #eaecef;
             color: #24292e;
         }
         
         .markdown-content h2 {
-            font-size: 1.8em;
+            font-size: 1.5em;
             font-weight: 600;
-            margin: 1.3em 0 0.6em 0;
+            margin: 1.3em 0 0.5em 0;
             padding-bottom: 0.3em;
             border-bottom: 1px solid #eaecef;
             color: #24292e;
         }
         
         .markdown-content h3 {
-            font-size: 1.5em;
+            font-size: 1.25em;
             font-weight: 600;
-            margin: 1.2em 0 0.5em 0;
+            margin: 1em 0 0.5em 0;
             color: #24292e;
         }
         
         .markdown-content h4 {
-            font-size: 1.3em;
+            font-size: 1em;
             font-weight: 600;
-            margin: 1em 0 0.4em 0;
+            margin: 1em 0 0.5em 0;
             color: #24292e;
         }
         
         .markdown-content h5 {
-            font-size: 1.1em;
+            font-size: 0.875em;
             font-weight: 600;
-            margin: 0.9em 0 0.3em 0;
+            margin: 1em 0 0.5em 0;
             color: #24292e;
         }
         
         .markdown-content h6 {
-            font-size: 1em;
+            font-size: 0.85em;
             font-weight: 600;
-            margin: 0.8em 0 0.3em 0;
+            margin: 1em 0 0.5em 0;
             color: #6a737d;
         }
         
         .markdown-content p {
-            margin: 0.8em 0;
+            margin: 1em 0;
             line-height: 1.7;
             color: #24292e;
         }
         
         .markdown-content ul, .markdown-content ol {
-            margin: 0.8em 0;
+            margin: 1em 0;
             padding-left: 2em;
         }
         
         .markdown-content li {
-            margin: 0.3em 0;
+            margin: 0.25em 0;
             line-height: 1.6;
         }
         
@@ -218,21 +182,22 @@
         
         .markdown-content code {
             font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-            font-size: 0.9em;
-            background-color: #f6f8fa;
+            font-size: 0.85em;
+            background-color: rgba(175, 184, 193, 0.2);
             padding: 0.2em 0.4em;
-            border-radius: 3px;
-            color: #e36209;
+            border-radius: 6px;
+            color: #24292e;
         }
         
         .markdown-content pre {
             background-color: #f6f8fa;
             border-radius: 6px;
-            font-size: 0.9em;
+            font-size: 0.85em;
             line-height: 1.45;
             overflow: auto;
             padding: 16px;
             margin: 1em 0;
+            border: 1px solid #d0d7de;
         }
         
         .markdown-content pre code {
@@ -249,8 +214,8 @@
         }
         
         .markdown-content blockquote {
-            border-left: 4px solid #dfe2e5;
-            color: #6a737d;
+            border-left: 4px solid #d0d7de;
+            color: #656d76;
             padding: 0 1em;
             margin: 1em 0;
         }
@@ -260,6 +225,9 @@
             border-spacing: 0;
             margin: 1em 0;
             width: 100%;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            overflow: hidden;
         }
         
         .markdown-content table th {
@@ -277,7 +245,7 @@
         
         .markdown-content table tr {
             background-color: #ffffff;
-            border-top: 1px solid #c6cbd1;
+            border-top: 1px solid #d0d7de;
         }
         
         .markdown-content table tr:nth-child(2n) {
@@ -286,12 +254,12 @@
         
         .markdown-content hr {
             border: 0;
-            border-top: 1px solid #e1e4e8;
+            border-top: 1px solid #d0d7de;
             margin: 2em 0;
         }
         
         .markdown-content a {
-            color: #0366d6;
+            color: #0969da;
             text-decoration: none;
         }
         
@@ -306,35 +274,12 @@
             margin: 1em 0;
         }
         
-        /* 인라인 코드와 강조 */
+        /* 인라인 코드 */
         .markdown-content p code, .markdown-content li code {
-            background-color: #f6f8fa;
-            border-radius: 3px;
-            font-size: 0.9em;
+            background-color: rgba(175, 184, 193, 0.2);
+            border-radius: 6px;
+            font-size: 0.85em;
             padding: 0.2em 0.4em;
-            color: #e36209;
-        }
-        
-        /* 목록 들여쓰기 */
-        .markdown-content ul ul, .markdown-content ol ol, .markdown-content ul ol, .markdown-content ol ul {
-            margin-top: 0.2em;
-            margin-bottom: 0.2em;
-        }
-        
-        /* 번호 목록 스타일 */
-        .markdown-content ol {
-            counter-reset: item;
-        }
-        
-        .markdown-content ol > li {
-            display: block;
-            margin: 0.3em 0;
-        }
-        
-        .markdown-content ol > li:before {
-            content: counter(item) ". ";
-            counter-increment: item;
-            font-weight: 600;
             color: #24292e;
         }
     </style>
@@ -364,6 +309,14 @@
     <script>
         let totalReports = 0;
         let currentPage = 1;
+        
+        // marked.js 설정
+        marked.setOptions({
+            breaks: true,
+            gfm: true,
+            headerIds: false,
+            mangle: false
+        });
         
         // Load total reports count
         async function loadTotalReports() {
@@ -424,7 +377,8 @@
                 
                 if (response.ok) {
                     const markdown = await response.text();
-                    const html = await convertMarkdownToHtml(markdown);
+                    // marked.js를 사용하여 마크다운을 HTML로 변환
+                    const html = marked.parse(markdown);
                     content.innerHTML = `<div class="markdown-content">${html}</div>`;
                 } else {
                     content.innerHTML = '<div class="loading">Report not found</div>';
@@ -433,88 +387,6 @@
                 console.error('Error loading report:', error);
                 content.innerHTML = '<div class="loading">Error loading report</div>';
             }
-        }
-        
-        // Enhanced markdown to HTML converter
-        async function convertMarkdownToHtml(markdown) {
-            let html = markdown;
-            
-            // Headers
-            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-            
-            // Bold and italic
-            html = html.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
-            html = html.replace(/\*(.*?)\*/gim, '<em>$1</em>');
-            
-            // Code blocks
-            html = html.replace(/```([\s\S]*?)```/gim, '<pre><code>$1</code></pre>');
-            
-            // Inline code
-            html = html.replace(/`([^`]+)`/gim, '<code>$1</code>');
-            
-            // Links
-            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2">$1</a>');
-            
-            // Horizontal rules
-            html = html.replace(/^---$/gim, '<hr>');
-            
-            // Lists - handle both ordered and unordered
-            const lines = html.split('\n');
-            let inList = false;
-            let listType = '';
-            let result = [];
-            
-            for (let i = 0; i < lines.length; i++) {
-                const line = lines[i];
-                const trimmedLine = line.trim();
-                
-                // Check for list items
-                if (trimmedLine.match(/^[-*+] /) || trimmedLine.match(/^\d+\. /)) {
-                    const isOrdered = trimmedLine.match(/^\d+\. /);
-                    const currentListType = isOrdered ? 'ol' : 'ul';
-                    
-                    if (!inList) {
-                        inList = true;
-                        listType = currentListType;
-                        result.push(`<${listType}>`);
-                    } else if (listType !== currentListType) {
-                        result.push(`</${listType}>`);
-                        listType = currentListType;
-                        result.push(`<${listType}>`);
-                    }
-                    
-                    const content = trimmedLine.replace(/^[-*+] /, '').replace(/^\d+\. /, '');
-                    result.push(`<li>${content}</li>`);
-                } else {
-                    if (inList) {
-                        result.push(`</${listType}>`);
-                        inList = false;
-                        listType = '';
-                    }
-                    result.push(line);
-                }
-            }
-            
-            if (inList) {
-                result.push(`</${listType}>`);
-            }
-            
-            html = result.join('\n');
-            
-            // Paragraphs
-            html = html.replace(/\n\n/gim, '</p><p>');
-            html = html.replace(/\n/gim, '<br>');
-            
-            // Wrap in paragraphs
-            html = '<p>' + html + '</p>';
-            
-            // Clean up empty paragraphs
-            html = html.replace(/<p><\/p>/gim, '');
-            html = html.replace(/<p><br><\/p>/gim, '');
-            
-            return html;
         }
         
         // Initialize
