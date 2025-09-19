@@ -2,9 +2,8 @@ name: Daily SaaS Analysis
 
 on:
   schedule:
-    # 매일 자정 (UTC)에 실행
     - cron: '0 0 * * *'
-  workflow_dispatch: # 수동 실행도 가능
+  workflow_dispatch:
 
 jobs:
   analyze:
@@ -13,6 +12,9 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
       
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -47,7 +49,6 @@ jobs:
       
     - name: Copy latest report to reports directory
       run: |
-        # 최신 리포트 파일을 찾아서 복사
         LATEST_REPORT=$(ls -t report/*.md | head -n 1)
         if [ -n "$LATEST_REPORT" ]; then
           cp "$LATEST_REPORT" reports/latest-report.md
@@ -182,4 +183,4 @@ jobs:
         git config --local user.name "GitHub Action"
         git add reports/
         git commit -m "Update daily analysis report - $(date)" || echo "No changes to commit"
-        git push
+        git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git

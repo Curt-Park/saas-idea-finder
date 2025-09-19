@@ -8,6 +8,7 @@ on:
   workflow_run:
     workflows: ["Daily SaaS Analysis"]
     types: [completed]
+  workflow_dispatch:
 
 permissions:
   contents: read
