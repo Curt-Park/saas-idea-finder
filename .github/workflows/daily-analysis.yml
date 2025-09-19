@@ -60,12 +60,13 @@ jobs:
         
     - name: Generate index page from template
       run: |
-        python templates/generate_index.py
+        cp templates/index.html reports/index.html
         
     - name: Commit and push reports
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add reports/
-        git commit -m "Update daily analysis report - $(date)" || echo "No changes to commit"
-        git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+      uses: offensive-vk/auto-commit-push@v8
+      with:
+        name: 'github-actions[bot]'
+        email: 'github-actions[bot]@users.noreply.github.com'
+        message: 'Update daily analysis report'
+        branch: main
+        github-token: ${{ secrets.GITHUB_TOKEN }}
