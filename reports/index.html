@@ -77,11 +77,49 @@
             margin-bottom: 20px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
+        .report-card h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        .report-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .download-btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        .download-btn:hover {
+            background: #5a6fd8;
+        }
         .footer {
             text-align: center;
             color: #666;
             margin-top: 40px;
             padding: 20px;
+        }
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .report-content {
+            display: none;
+        }
+        .report-content.active {
+            display: block;
         }
         .loading {
             text-align: center;
@@ -89,90 +127,11 @@
             color: #666;
         }
 
-        /* Table of Contents Styles */
-        .toc {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            max-height: 400px;
-            overflow-y: auto;
-            position: relative;
-            z-index: 10;
-        }
-        .toc h3 {
-            margin: 0 0 15px 0;
-            color: #333;
-            font-size: 1.1em;
-            position: sticky;
-            top: 0;
-            background: #f8f9fa;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #e9ecef;
-        }
-        .toc ul {
-            margin: 0;
-            padding-left: 0;
-            list-style: none;
-        }
-        .toc li {
-            margin: 3px 0;
-            line-height: 1.4;
-        }
-        .toc a {
-            color: #667eea;
-            text-decoration: none;
-            font-size: 0.9em;
-            transition: all 0.2s;
-            display: block;
-            padding: 4px 8px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .toc a:hover {
-            color: #5a6fd8;
-            background-color: #e9ecef;
-            text-decoration: none;
-        }
-        .toc .toc-h1 {
-            font-weight: 600;
-            font-size: 1em;
-            padding-left: 8px;
-        }
-        .toc .toc-h2 {
-            font-weight: 500;
-            font-size: 0.95em;
-            padding-left: 23px;
-        }
-        .toc .toc-h3 {
-            font-weight: 400;
-            font-size: 0.9em;
-            padding-left: 38px;
-        }
-        .toc .toc-h4 {
-            font-weight: 400;
-            font-size: 0.85em;
-            padding-left: 53px;
-        }
-        .toc .toc-h5 {
-            font-weight: 400;
-            font-size: 0.8em;
-            padding-left: 68px;
-        }
-        .toc .toc-h6 {
-            font-weight: 400;
-            font-size: 0.75em;
-            padding-left: 83px;
-        }
-
         /* GitHub Style Markdown */
         .markdown-content {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.7;
             color: #24292e;
-            position: relative;
-            z-index: 1;
         }
 
         .markdown-content h1 {
@@ -182,7 +141,6 @@
             padding-bottom: 0.3em;
             border-bottom: 1px solid #eaecef;
             color: #24292e;
-            scroll-margin-top: 100px;
         }
 
         .markdown-content h2 {
@@ -192,7 +150,6 @@
             padding-bottom: 0.3em;
             border-bottom: 1px solid #eaecef;
             color: #24292e;
-            scroll-margin-top: 100px;
         }
 
         .markdown-content h3 {
@@ -200,7 +157,6 @@
             font-weight: 600;
             margin: 1em 0 0.5em 0;
             color: #24292e;
-            scroll-margin-top: 100px;
         }
 
         .markdown-content h4 {
@@ -208,7 +164,6 @@
             font-weight: 600;
             margin: 1em 0 0.5em 0;
             color: #24292e;
-            scroll-margin-top: 100px;
         }
 
         .markdown-content h5 {
@@ -216,7 +171,6 @@
             font-weight: 600;
             margin: 1em 0 0.5em 0;
             color: #24292e;
-            scroll-margin-top: 100px;
         }
 
         .markdown-content h6 {
@@ -224,7 +178,6 @@
             font-weight: 600;
             margin: 1em 0 0.5em 0;
             color: #6a737d;
-            scroll-margin-top: 100px;
         }
 
         .markdown-content p {
@@ -374,8 +327,12 @@
         <h1>🚀 SaaS Idea Finder</h1>
         <p>Daily AI-powered SaaS opportunity analysis</p>
     </div>
-
+    
     <div class="pagination">
+        <h3>📊 Select Report</h3>
+        <div class="page-numbers" id="pageNumbers">
+            <div class="loading">Loading reports...</div>
+        </div>
         <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea;">
             <p style="margin: 0; color: #495057; font-size: 0.9em;">
                 <strong>Want to check reports from all dates?</strong><br>
@@ -387,16 +344,16 @@
             </p>
         </div>
     </div>
-
+    
     <div class="report-card" id="reportContent">
         <div class="loading">Select a report to view</div>
     </div>
-
+    
     <div class="footer">
         <p>🤖 Powered by AI Agents | Updated Daily at Midnight UTC</p>
         <p><a href="https://github.com/Curt-Park/saas-idea-finder">View Source Code</a></p>
     </div>
-
+    
     <script>
         let totalReports = 0;
         let currentPage = 1;
@@ -408,32 +365,25 @@
             headerIds: false,
             mangle: false
         });
-
+        
         // Load total reports count
         async function loadTotalReports() {
             try {
-                const response = await fetch('total-reports.txt');
-                if (response.ok) {
-                    const text = await response.text();
-                    totalReports = parseInt(text.trim());
-                    generatePageNumbers();
-                } else {
-                    // Fallback: try to load latest report
-                    totalReports = 1;
-                    generatePageNumbers();
-                }
+                // Since we only have latest-report.md, set totalReports to 1
+                totalReports = 1;
+                generatePageNumbers();
             } catch (error) {
                 console.error('Error loading total reports:', error);
                 totalReports = 1;
                 generatePageNumbers();
             }
         }
-
+        
         // Generate page number buttons
         function generatePageNumbers() {
             const container = document.getElementById('pageNumbers');
             container.innerHTML = '';
-
+            
             for (let i = 1; i <= totalReports; i++) {
                 const pageBtn = document.createElement('div');
                 pageBtn.className = 'page-number';
@@ -441,98 +391,39 @@
                 pageBtn.onclick = () => loadReport(i);
                 container.appendChild(pageBtn);
             }
-
+            
             // Load the first report by default
             if (totalReports > 0) {
                 loadReport(1);
             }
         }
-
-        // Generate table of contents
-        function generateTableOfContents(markdown) {
-            const lines = markdown.split('\n');
-            const headers = [];
-
-            lines.forEach((line, index) => {
-                const trimmedLine = line.trim();
-                if (trimmedLine.startsWith('#')) {
-                    const level = trimmedLine.match(/^#+/)[0].length;
-                    const text = trimmedLine.replace(/^#+\s*/, '');
-                    const id = `header-${index}`;
-                    headers.push({ level, text, id, lineNumber: index });
-                }
-            });
-
-            if (headers.length === 0) return '';
-
-            let tocHtml = '<div class="toc"><h3>Table of Contents</h3><ul>';
-
-            headers.forEach(header => {
-                const linkText = header.text.replace(/[📋⏱️🚀🎯📊]/g, '').trim();
-                const tocClass = `toc-h${header.level}`;
-                tocHtml += `<li><a href="#${header.id}" onclick="scrollToHeader('${header.id}')" class="${tocClass}">${linkText}</a></li>\n`;
-            });
-
-            tocHtml += '</ul></div>';
-            return tocHtml;
-        }
-
-        // Scroll to header function with offset
-        function scrollToHeader(headerId) {
-            const element = document.getElementById(headerId);
-            if (element) {
-                // Calculate offset to account for sticky elements
-                const offset = 100;
-                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-                const offsetPosition = elementPosition - offset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        }
-
-        // Add IDs to headers function
-        function addIdsToHeaders(html) {
-            return html.replace(/<(h[1-6])[^>]*>(.*?)<\/h[1-6]>/g, (match, tag, content) => {
-                const id = 'header-' + Math.random().toString(36).substr(2, 9);
-                return `<${tag} id="${id}">${content}</${tag}>`;
-            });
-        }
-
+        
         // Load report content
         async function loadReport(pageNumber) {
             currentPage = pageNumber;
-
+            
             // Update active page button
             document.querySelectorAll('.page-number').forEach(btn => {
                 btn.classList.remove('active');
             });
             document.querySelectorAll('.page-number')[pageNumber - 1]?.classList.add('active');
-
+            
             // Show loading
             const content = document.getElementById('reportContent');
             content.innerHTML = '<div class="loading">Loading report...</div>';
-
+            
             try {
-                const reportFile = pageNumber === 1 ? 'latest-report.md' : `report-${pageNumber}.md`;
+                const reportFile = 'latest-report.md';
                 const response = await fetch(reportFile);
-
+                
                 if (response.ok) {
                     const markdown = await response.text();
-
-                    // Generate table of contents
-                    const toc = generateTableOfContents(markdown);
-
+                    
                     // Convert markdown to HTML using marked.js
-                    let html = marked.parse(markdown);
-
-                    // Add IDs to headers
-                    html = addIdsToHeaders(html);
-
-                    // Display table of contents and content together
-                    content.innerHTML = `${toc}<div class="markdown-content">${html}</div>`;
+                    const html = marked.parse(markdown);
+                    
+                    // Display content with proper styling
+                    content.innerHTML = `<div class="markdown-content">${html}</div>`;
                 } else {
                     content.innerHTML = '<div class="loading">Report not found</div>';
                 }
@@ -541,7 +432,7 @@
                 content.innerHTML = '<div class="loading">Error loading report</div>';
             }
         }
-
+        
         // Initialize
         loadTotalReports();
     </script>
