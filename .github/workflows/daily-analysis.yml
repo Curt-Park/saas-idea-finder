@@ -65,8 +65,8 @@ jobs:
     - name: Commit and push reports
       uses: offensive-vk/auto-commit-push@v8
       with:
-        name: 'github-actions[bot]'
-        email: 'github-actions[bot]@users.noreply.github.com'
+        name: 'Curt-Park'
+        email: 'www.jwpark.co.kr@gmail.com'
         message: 'Update daily analysis report'
         branch: main
         github-token: ${{ secrets.GITHUB_TOKEN }}
