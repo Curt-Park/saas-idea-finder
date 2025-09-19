@@ -88,14 +88,57 @@
             padding: 40px;
             color: #666;
         }
-        
+
+        /* 목차 스타일 */
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: sticky;
+            top: 20px;
+        }
+        .toc h3 {
+            margin: 0 0 15px 0;
+            color: #333;
+            font-size: 1.1em;
+        }
+        .toc ul {
+            margin: 0;
+            padding-left: 20px;
+            list-style: none;
+        }
+        .toc li {
+            margin: 5px 0;
+            line-height: 1.4;
+        }
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: color 0.2s;
+        }
+        .toc a:hover {
+            color: #5a6fd8;
+            text-decoration: underline;
+        }
+        .toc ul ul {
+            margin-top: 5px;
+            padding-left: 15px;
+        }
+        .toc ul ul a {
+            font-size: 0.85em;
+            color: #6c757d;
+        }
+
         /* GitHub 스타일 마크다운 */
         .markdown-content {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.7;
             color: #24292e;
         }
-        
+
         .markdown-content h1 {
             font-size: 2em;
             font-weight: 600;
@@ -104,7 +147,7 @@
             border-bottom: 1px solid #eaecef;
             color: #24292e;
         }
-        
+
         .markdown-content h2 {
             font-size: 1.5em;
             font-weight: 600;
@@ -113,73 +156,73 @@
             border-bottom: 1px solid #eaecef;
             color: #24292e;
         }
-        
+
         .markdown-content h3 {
             font-size: 1.25em;
             font-weight: 600;
             margin: 1em 0 0.5em 0;
             color: #24292e;
         }
-        
+
         .markdown-content h4 {
             font-size: 1em;
             font-weight: 600;
             margin: 1em 0 0.5em 0;
             color: #24292e;
         }
-        
+
         .markdown-content h5 {
             font-size: 0.875em;
             font-weight: 600;
             margin: 1em 0 0.5em 0;
             color: #24292e;
         }
-        
+
         .markdown-content h6 {
             font-size: 0.85em;
             font-weight: 600;
             margin: 1em 0 0.5em 0;
             color: #6a737d;
         }
-        
+
         .markdown-content p {
             margin: 1em 0;
             line-height: 1.7;
             color: #24292e;
         }
-        
+
         .markdown-content ul, .markdown-content ol {
             margin: 1em 0;
             padding-left: 2em;
         }
-        
+
         .markdown-content li {
             margin: 0.25em 0;
             line-height: 1.6;
         }
-        
+
         .markdown-content ul li {
             list-style-type: disc;
         }
-        
+
         .markdown-content ol li {
             list-style-type: decimal;
         }
-        
+
         .markdown-content ul ul, .markdown-content ol ol, .markdown-content ul ol, .markdown-content ol ul {
             margin: 0.2em 0;
         }
-        
+
         .markdown-content strong {
             font-weight: 600;
             color: #24292e;
         }
-        
+
         .markdown-content em {
             font-style: italic;
             color: #24292e;
         }
-        
+
         .markdown-content code {
             font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
             font-size: 0.85em;
@@ -188,7 +231,7 @@
             border-radius: 6px;
             color: #24292e;
         }
-        
+
         .markdown-content pre {
             background-color: #f6f8fa;
             border-radius: 6px;
@@ -199,7 +242,7 @@
             margin: 1em 0;
             border: 1px solid #d0d7de;
         }
-        
+
         .markdown-content pre code {
             background-color: transparent;
             border: 0;
@@ -212,14 +255,14 @@
             word-wrap: normal;
             color: #24292e;
         }
-        
+
         .markdown-content blockquote {
             border-left: 4px solid #d0d7de;
             color: #656d76;
             padding: 0 1em;
             margin: 1em 0;
         }
-        
+
         .markdown-content table {
             border-collapse: collapse;
             border-spacing: 0;
@@ -229,7 +272,7 @@
             border-radius: 6px;
             overflow: hidden;
         }
-        
+
         .markdown-content table th {
             background-color: #f6f8fa;
             border: 1px solid #d0d7de;
@@ -237,43 +280,43 @@
             padding: 6px 13px;
             text-align: left;
         }
-        
+
         .markdown-content table td {
             border: 1px solid #d0d7de;
             padding: 6px 13px;
         }
-        
+
         .markdown-content table tr {
             background-color: #ffffff;
             border-top: 1px solid #d0d7de;
         }
-        
+
         .markdown-content table tr:nth-child(2n) {
             background-color: #f6f8fa;
         }
-        
+
         .markdown-content hr {
             border: 0;
             border-top: 1px solid #d0d7de;
             margin: 2em 0;
         }
-        
+
         .markdown-content a {
             color: #0969da;
             text-decoration: none;
         }
-        
+
         .markdown-content a:hover {
             text-decoration: underline;
         }
-        
+
         .markdown-content img {
             max-width: 100%;
             height: auto;
             border-radius: 6px;
             margin: 1em 0;
         }
-        
+
         /* 인라인 코드 */
         .markdown-content p code, .markdown-content li code {
             background-color: rgba(175, 184, 193, 0.2);
@@ -289,27 +332,27 @@
         <h1>🚀 SaaS Idea Finder</h1>
         <p>Daily AI-powered SaaS opportunity analysis</p>
     </div>
-    
+
     <div class="pagination">
         <h3>📊 Select Report</h3>
         <div class="page-numbers" id="pageNumbers">
             <div class="loading">Loading reports...</div>
         </div>
     </div>
-    
+
     <div class="report-card" id="reportContent">
         <div class="loading">Select a report to view</div>
     </div>
-    
+
     <div class="footer">
         <p>🤖 Powered by AI Agents | Updated Daily at Midnight UTC</p>
         <p><a href="https://github.com/Curt-Park/saas-idea-finder">View Source Code</a></p>
     </div>
-    
+
     <script>
         let totalReports = 0;
         let currentPage = 1;
-        
+
         // marked.js 설정
         marked.setOptions({
             breaks: true,
@@ -317,7 +360,7 @@
             headerIds: false,
             mangle: false
         });
-        
+
         // Load total reports count
         async function loadTotalReports() {
             try {
@@ -337,12 +380,12 @@
                 generatePageNumbers();
             }
         }
-        
+
         // Generate page number buttons
         function generatePageNumbers() {
             const container = document.getElementById('pageNumbers');
             container.innerHTML = '';
-            
+
             for (let i = 1; i <= totalReports; i++) {
                 const pageBtn = document.createElement('div');
                 pageBtn.className = 'page-number';
@@ -350,36 +393,90 @@
                 pageBtn.onclick = () => loadReport(i);
                 container.appendChild(pageBtn);
             }
-            
+
             // Load the first report by default
             if (totalReports > 0) {
                 loadReport(1);
             }
         }
-        
+
+        // 목차 생성 함수
+        function generateTableOfContents(markdown) {
+            const lines = markdown.split('\n');
+            const headers = [];
+
+            lines.forEach((line, index) => {
+                const trimmedLine = line.trim();
+                if (trimmedLine.startsWith('#')) {
+                    const level = trimmedLine.match(/^#+/)[0].length;
+                    const text = trimmedLine.replace(/^#+\s*/, '');
+                    const id = `header-${index}`;
+                    headers.push({ level, text, id, lineNumber: index });
+                }
+            });
+
+            if (headers.length === 0) return '';
+
+            let tocHtml = '<div class="toc"><h3>📋 목차</h3><ul>';
+
+            headers.forEach(header => {
+                const indent = '  '.repeat(header.level - 1);
+                const linkText = header.text.replace(/[⏱️🚀]/g, '').trim();
+                tocHtml += `${indent}<li><a href="#${header.id}" onclick="scrollToHeader('${header.id}')">${linkText}</a></li>\n`;
+            });
+
+            tocHtml += '</ul></div>';
+            return tocHtml;
+        }
+
+        // 헤더로 스크롤하는 함수
+        function scrollToHeader(headerId) {
+            const element = document.getElementById(headerId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // 마크다운에 ID 추가하는 함수
+        function addIdsToHeaders(html) {
+            return html.replace(/<(h[1-6])[^>]*>(.*?)<\/h[1-6]>/g, (match, tag, content) => {
+                const id = 'header-' + Math.random().toString(36).substr(2, 9);
+                return `<${tag} id="${id}">${content}</${tag}>`;
+            });
+        }
+
         // Load report content
         async function loadReport(pageNumber) {
             currentPage = pageNumber;
-            
+
             // Update active page button
             document.querySelectorAll('.page-number').forEach(btn => {
                 btn.classList.remove('active');
             });
             document.querySelectorAll('.page-number')[pageNumber - 1]?.classList.add('active');
-            
+
             // Show loading
             const content = document.getElementById('reportContent');
             content.innerHTML = '<div class="loading">Loading report...</div>';
-            
+
             try {
                 const reportFile = pageNumber === 1 ? 'latest-report.md' : `report-${pageNumber}.md`;
                 const response = await fetch(reportFile);
-                
+
                 if (response.ok) {
                     const markdown = await response.text();
+
+                    // 목차 생성
+                    const toc = generateTableOfContents(markdown);
+
                     // marked.js를 사용하여 마크다운을 HTML로 변환
-                    const html = marked.parse(markdown);
-                    content.innerHTML = `<div class="markdown-content">${html}</div>`;
+                    let html = marked.parse(markdown);
+
+                    // 헤더에 ID 추가
+                    html = addIdsToHeaders(html);
+
+                    // 목차와 내용을 함께 표시
+                    content.innerHTML = `${toc}<div class="markdown-content">${html}</div>`;
                 } else {
                     content.innerHTML = '<div class="loading">Report not found</div>';
                 }
@@ -388,7 +485,7 @@
                 content.innerHTML = '<div class="loading">Error loading report</div>';
             }
         }
-        
+
         // Initialize
         loadTotalReports();
     </script>
