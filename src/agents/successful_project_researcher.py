@@ -9,6 +9,8 @@ from crewai import Agent, Task
 from crewai_tools import SerperDevTool, WebsiteSearchTool
 from langchain_openai import ChatOpenAI
 
+from ..utils.config import RESEARCH_SOURCES
+
 
 class SuccessfulProjectResearcherAgent:
     def __init__(self, openai_api_key: str, model: str = "gpt-4o-mini", temperature: float = 0.3):
@@ -32,6 +34,9 @@ class SuccessfulProjectResearcherAgent:
 
     def create_successful_project_research_task(self, reddit_trend_analysis: str) -> Task:
         """Create successful project research task."""
+        # Format research sources from config
+        research_sources_text = "\n".join([f"{i + 1}. {source}" for i, source in enumerate(RESEARCH_SOURCES)])
+
         return Task(
             description=f"""
             Research and analyze successful micro-SaaS projects that are already generating revenue.
@@ -41,16 +46,7 @@ class SuccessfulProjectResearcherAgent:
             {reddit_trend_analysis}
             
             Research sources:
-            1. Indie Hackers - Successful micro-SaaS case studies
-            2. Product Hunt - Trending and successful products
-            3. Starter Story - Entrepreneur interviews and case studies
-            4. MicroConf - Micro-SaaS conference presentations
-            5. Twitter/X - Solo entrepreneur success stories
-            6. Reddit r/indiehackers - Success stories and revenue reports
-            7. GitHub - Open source projects with commercial success
-            8. Hacker News - Recent startup and SaaS discussions and Show HN posts
-            9. Y Combinator - Recent batch companies and success stories
-            10. TechCrunch - Recent startup funding and success stories
+            {research_sources_text}
             
             Focus on projects with these characteristics:
             - Monthly recurring revenue (MRR) between $1K-$50K

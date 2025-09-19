@@ -62,7 +62,7 @@ class SaasIdeaFinderCrew:
             Comprehensive analysis of successful projects with improvement suggestions
         """
         print("🔍 Starting successful project analysis...")
-        
+
         # Initialize timing tracking
         step_times = {}
         total_start_time = time.time()
@@ -144,7 +144,7 @@ class SaasIdeaFinderCrew:
         # Get timing information
         step_times = analysis_result.get("step_times", {})
         total_time = step_times.get("total_time", 0)
-        
+
         # Format timing information
         timing_section = ""
         if step_times:
@@ -152,16 +152,16 @@ class SaasIdeaFinderCrew:
 ## ⏱️ Analysis Performance
 
 ### Step-by-Step Timing
-- **Reddit Trend Analysis**: {step_times.get('reddit_analysis', 0):.1f} seconds
-- **Successful Projects Research**: {step_times.get('successful_projects_research', 0):.1f} seconds
-- **Competitive Landscape Analysis**: {step_times.get('competitive_analysis', 0):.1f} seconds
-- **MVP Feature Suggestions**: {step_times.get('mvp_suggestions', 0):.1f} seconds
-- **Problem Analysis**: {step_times.get('problem_analysis', 0):.1f} seconds
-- **Revenue Analysis**: {step_times.get('revenue_analysis', 0):.1f} seconds
+- **Reddit Trend Analysis**: {step_times.get("reddit_analysis", 0):.1f} seconds
+- **Successful Projects Research**: {step_times.get("successful_projects_research", 0):.1f} seconds
+- **Competitive Landscape Analysis**: {step_times.get("competitive_analysis", 0):.1f} seconds
+- **MVP Feature Suggestions**: {step_times.get("mvp_suggestions", 0):.1f} seconds
+- **Problem Analysis**: {step_times.get("problem_analysis", 0):.1f} seconds
+- **Revenue Analysis**: {step_times.get("revenue_analysis", 0):.1f} seconds
 
 ### Total Analysis Time
-- **Overall Duration**: {total_time:.1f} seconds ({total_time/60:.1f} minutes)
-- **Average Step Time**: {total_time/6:.1f} seconds per step
+- **Overall Duration**: {total_time:.1f} seconds ({total_time / 60:.1f} minutes)
+- **Average Step Time**: {total_time / 6:.1f} seconds per step
 
 """
 
@@ -172,7 +172,7 @@ class SaasIdeaFinderCrew:
 - **Analysis Type**: Successful Project Analysis
 - **Focus**: Analyzing successful micro-SaaS projects and suggesting improvements
 - **Analysis Date**: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
-- **Total Processing Time**: {total_time:.1f} seconds ({total_time/60:.1f} minutes)
+- **Total Processing Time**: {total_time:.1f} seconds ({total_time / 60:.1f} minutes)
 
 {timing_section}
 ## 🎯 Key Findings

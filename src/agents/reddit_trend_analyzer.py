@@ -126,21 +126,18 @@ class RedditTrendAnalyzerAgent:
         hot_posts_task = self.reddit_scraper.scrape_hot_posts_async(limit_per_subreddit=10)
         weekly_top_posts_task = self.reddit_scraper.scrape_weekly_top_posts_async(limit_per_subreddit=10)
         pain_point_posts_task = self.reddit_scraper.get_pain_point_posts_async(limit_per_subreddit=10)
-        
+
         # Wait for all tasks to complete
         hot_posts, weekly_top_posts, pain_point_posts = await asyncio.gather(
-            hot_posts_task,
-            weekly_top_posts_task,
-            pain_point_posts_task,
-            return_exceptions=True
+            hot_posts_task, weekly_top_posts_task, pain_point_posts_task, return_exceptions=True
         )
-        
+
         # Handle any exceptions
         reddit_data = {}
         reddit_data["hot_posts"] = hot_posts if not isinstance(hot_posts, Exception) else {}
         reddit_data["weekly_top_posts"] = weekly_top_posts if not isinstance(weekly_top_posts, Exception) else {}
         reddit_data["pain_point_posts"] = pain_point_posts if not isinstance(pain_point_posts, Exception) else {}
-        
+
         print("✅ Reddit data collection completed")
 
         # Create analysis task with real data
