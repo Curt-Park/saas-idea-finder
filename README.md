@@ -157,7 +157,7 @@ A: Yes, you can modify the `subreddits` list in `src/utils/reddit_scraper.py` to
 A: No, the tool only processes Reddit data in memory and doesn't store it permanently. Only the analysis results are saved to files.
 
 **Q: Can I run this on a schedule?**
-A: Yes, you can set up a cron job or use GitHub Actions to run the analysis automatically. Be mindful of API rate limits.
+A: Yes, you can set up a cron job or use GitHub Actions to run the analysis automatically. This repository includes GitHub Actions workflows for daily automated analysis and GitHub Pages deployment.
 
 **Q: Which OpenAI model should I use?**
 A: 
@@ -171,6 +171,71 @@ A:
 - **0.1-0.3** (default): More focused and consistent results, recommended for analysis
 - **0.5-0.7**: Balanced creativity and consistency
 - **0.8-1.0**: More creative and varied results, use with caution for analysis tasks
+
+## 🤖 Automated Daily Analysis
+
+This repository includes GitHub Actions workflows for automated daily analysis and GitHub Pages deployment.
+
+### 🔧 GitHub Actions Setup
+
+The repository includes two main workflows:
+
+1. **Daily Analysis** (`.github/workflows/daily-analysis.yml`):
+   - Runs every day at midnight UTC
+   - Executes the SaaS analysis automatically
+   - Generates and commits reports
+
+2. **GitHub Pages Deployment** (`.github/workflows/deploy-pages.yml`):
+   - Deploys reports to GitHub Pages
+   - Creates a web interface for viewing reports
+   - Updates automatically when new reports are generated
+
+### 🌐 GitHub Pages Setup
+
+To enable GitHub Pages deployment:
+
+1. **Enable GitHub Pages**:
+   - Go to your repository Settings
+   - Navigate to Pages section
+   - Set Source to "GitHub Actions"
+
+2. **Configure Secrets**:
+   - Go to Settings → Secrets and variables → Actions
+   - Add the following secrets:
+     ```
+     OPENAI_API_KEY=your-openai-api-key
+     SERPER_API_KEY=your-serper-api-key (optional)
+     REDDIT_CLIENT_ID=your-reddit-client-id
+     REDDIT_CLIENT_SECRET=your-reddit-client-secret
+     REDDIT_USER_AGENT=SaaS Idea Finder Bot
+     ```
+
+3. **Manual Trigger**:
+   - Go to Actions tab in your repository
+   - Select "Daily SaaS Analysis" workflow
+   - Click "Run workflow" to test
+
+### 📊 Web Interface
+
+Once deployed, your reports will be available at:
+- **GitHub Pages URL**: `https://yourusername.github.io/saas-idea-finder`
+- **Latest Report**: Automatically updated daily
+- **Beautiful Interface**: Clean, responsive design for easy reading
+
+### ⚙️ Customization
+
+You can customize the analysis by:
+
+1. **Changing Schedule**:
+   - Edit `.github/workflows/daily-analysis.yml`
+   - Modify the cron schedule (currently `0 0 * * *` for midnight UTC)
+
+2. **Model Settings**:
+   - Change the model in the workflow: `python main.py --model gpt-4o --temperature 0.5`
+
+3. **Report Styling**:
+   - Edit the HTML template in the workflow
+   - Customize the web interface appearance
 
 ## 📄 License
 

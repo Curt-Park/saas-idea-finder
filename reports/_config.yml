@@ -1,0 +1,25 @@
+# GitHub Pages configuration for SaaS Idea Finder Reports
+
+title: SaaS Idea Finder
+description: Daily AI-powered SaaS opportunity analysis
+author: SaaS Idea Finder Team
+
+# GitHub Pages settings
+baseurl: "/saas-idea-finder"
+url: "https://curt-park.github.io"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Navigation
+navigation:
+  - title: Latest Report
+    url: /latest-report.md
+  - title: GitHub Repository
+    url: https://github.com/Curt-Park/saas-idea-finder
+
+# SEO
+description: "Daily AI-powered analysis of SaaS opportunities, market trends, and successful micro-SaaS projects"
+keywords: "SaaS, micro-SaaS, startup, AI, market analysis, business opportunities"
