@@ -36,7 +36,7 @@ class SuccessfulProjectResearcherAgent:
             description=f"""
             Research and analyze successful micro-SaaS projects that are already generating revenue.
             Focus on projects that address the pain points and opportunities identified in the Reddit trend analysis.
-            
+
             REDDIT TREND ANALYSIS SUMMARY:
             {reddit_trend_analysis}
             
@@ -61,6 +61,8 @@ class SuccessfulProjectResearcherAgent:
             - Still actively growing and generating revenue
             - Address similar pain points identified in Reddit trend analysis
             
+            IMPORTANT: Match each successful project to specific Reddit pain points and rank them according to the pain point severity/frequency ranking from Reddit analysis.
+
             Analysis criteria for each project:
             
             1. Business Model Analysis:
@@ -100,34 +102,38 @@ class SuccessfulProjectResearcherAgent:
                - Founder background and skills
             
             Deliverables:
-            - Top 10 successful micro-SaaS projects (ranked by revenue potential) that address Reddit-identified pain points:
-              * Launch dates and timeline to success
+            - Top 10 successful micro-SaaS projects RANKED BY REDDIT PAIN POINT SEVERITY/FREQUENCY:
+              * For each project, specify which Reddit pain point it addresses (e.g., "Addresses Pain Point #1: AI Privacy Concerns")
+              * Launch dates and timeline to success (prioritize 2023-2024 launches)
               * Current revenue status and growth trajectory
               * Founder background and team composition
               * Marketing strategies and customer acquisition methods
               * How they solve specific pain points from Reddit analysis
+              * Connection to emerging market opportunities identified in Reddit analysis
             - Detailed analysis of each project including launch timeline
             - Common success patterns and strategies from recent launches
             - Market opportunities and gaps identified from recent projects
             - Implementation recommendations based on recent success stories
-            - Connection between Reddit pain points and successful project solutions
-            """,
+            - Clear mapping between Reddit pain points and successful project solutions
+            """,  # noqa
             agent=self.agent,
             expected_output="""
             Successful Micro-SaaS Research Report:
-            1. Top 10 successful projects (ranked by revenue potential) that address Reddit-identified pain points:
-               - Launch dates and timeline to success
+            1. Top 10 successful projects RANKED BY REDDIT PAIN POINT SEVERITY/FREQUENCY:
+               - For each project, specify which Reddit pain point it addresses (e.g., "Addresses Pain Point #1: AI Privacy Concerns")
+               - Launch dates and timeline to success (prioritize 2023-2024 launches)
                - Current revenue status and growth trajectory
                - Founder background and team composition
                - Marketing strategies and customer acquisition methods
                - How they solve specific pain points from Reddit analysis
+               - Connection to emerging market opportunities identified in Reddit analysis
             2. Detailed analysis of each project including launch timeline
             3. Common success patterns and strategies from recent launches
             4. Market opportunities and gaps identified from recent projects
             5. Implementation recommendations based on recent success stories
             6. Revenue and growth insights from recent successful projects
-            7. Connection between Reddit pain points and successful project solutions
-            """,
+            7. Clear mapping between Reddit pain points and successful project solutions
+            """,  # noqa
         )
 
     def research_successful_projects(self, reddit_trend_analysis: str) -> dict[str, Any]:

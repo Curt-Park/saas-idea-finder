@@ -111,13 +111,15 @@ class SaasIdeaFinderCrew:
         Returns:
             Summary report
         """
+        from datetime import datetime
+
         report = f"""
 # Successful Project Analysis Report
 
 ## 📋 Analysis Overview
 - **Analysis Type**: Successful Project Analysis
 - **Focus**: Analyzing successful micro-SaaS projects and suggesting improvements
-- **Analysis Date**: {analysis_result.get("status", "Completed")}
+- **Analysis Date**: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 
 ## 🎯 Key Findings
 
