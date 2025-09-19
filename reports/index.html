@@ -96,13 +96,20 @@
             border-radius: 8px;
             padding: 20px;
             margin-bottom: 20px;
-            position: sticky;
-            top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            position: relative;
+            z-index: 10;
         }
         .toc h3 {
             margin: 0 0 15px 0;
             color: #333;
             font-size: 1.1em;
+            position: sticky;
+            top: 0;
+            background: #f8f9fa;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e9ecef;
         }
         .toc ul {
             margin: 0;
@@ -117,43 +124,46 @@
             color: #667eea;
             text-decoration: none;
             font-size: 0.9em;
-            transition: color 0.2s;
+            transition: all 0.2s;
             display: block;
-            padding: 2px 0;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
         }
         .toc a:hover {
             color: #5a6fd8;
-            text-decoration: underline;
+            background-color: #e9ecef;
+            text-decoration: none;
         }
         .toc .toc-h1 {
             font-weight: 600;
             font-size: 1em;
-            padding-left: 0;
+            padding-left: 8px;
         }
         .toc .toc-h2 {
             font-weight: 500;
             font-size: 0.95em;
-            padding-left: 15px;
+            padding-left: 23px;
         }
         .toc .toc-h3 {
             font-weight: 400;
             font-size: 0.9em;
-            padding-left: 30px;
+            padding-left: 38px;
         }
         .toc .toc-h4 {
             font-weight: 400;
             font-size: 0.85em;
-            padding-left: 45px;
+            padding-left: 53px;
         }
         .toc .toc-h5 {
             font-weight: 400;
             font-size: 0.8em;
-            padding-left: 60px;
+            padding-left: 68px;
         }
         .toc .toc-h6 {
             font-weight: 400;
             font-size: 0.75em;
-            padding-left: 75px;
+            padding-left: 83px;
         }
 
         /* GitHub Style Markdown */
@@ -161,6 +171,8 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.7;
             color: #24292e;
+            position: relative;
+            z-index: 1;
         }
 
         .markdown-content h1 {
@@ -170,6 +182,7 @@
             padding-bottom: 0.3em;
             border-bottom: 1px solid #eaecef;
             color: #24292e;
+            scroll-margin-top: 100px;
         }
 
         .markdown-content h2 {
@@ -179,6 +192,7 @@
             padding-bottom: 0.3em;
             border-bottom: 1px solid #eaecef;
             color: #24292e;
+            scroll-margin-top: 100px;
         }
 
         .markdown-content h3 {
@@ -186,6 +200,7 @@
             font-weight: 600;
             margin: 1em 0 0.5em 0;
             color: #24292e;
+            scroll-margin-top: 100px;
         }
 
         .markdown-content h4 {
@@ -193,6 +208,7 @@
             font-weight: 600;
             margin: 1em 0 0.5em 0;
             color: #24292e;
+            scroll-margin-top: 100px;
         }
 
         .markdown-content h5 {
@@ -200,6 +216,7 @@
             font-weight: 600;
             margin: 1em 0 0.5em 0;
             color: #24292e;
+            scroll-margin-top: 100px;
         }
 
         .markdown-content h6 {
@@ -207,6 +224,7 @@
             font-weight: 600;
             margin: 1em 0 0.5em 0;
             color: #6a737d;
+            scroll-margin-top: 100px;
         }
 
         .markdown-content p {
@@ -453,11 +471,19 @@
             return tocHtml;
         }
 
-        // Scroll to header function
+        // Scroll to header function with offset
         function scrollToHeader(headerId) {
             const element = document.getElementById(headerId);
             if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
+                // Calculate offset to account for sticky elements
+                const offset = 100;
+                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = elementPosition - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
             }
         }
 

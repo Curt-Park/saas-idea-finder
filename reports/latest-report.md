@@ -26,7 +26,6 @@
 ## 🎯 Key Findings
 
 ### 1. Reddit Trend Analysis
-### Reddit Trend Analysis Report:
 
 #### 1. Top Trending Pain Points (Ranked by Frequency and Severity)
 

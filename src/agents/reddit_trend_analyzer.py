@@ -104,7 +104,6 @@ class RedditTrendAnalyzerAgent:
             """,
             agent=self.agent,
             expected_output="""
-            Reddit Trend Analysis Report:
             1. Top trending pain points (ranked by frequency and severity) with:
                - Direct Reddit post references (URLs, titles, dates)
                - Engagement metrics (upvotes, comments)
