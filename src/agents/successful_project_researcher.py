@@ -48,7 +48,9 @@ class SuccessfulProjectResearcherAgent:
             5. Twitter/X - Solo entrepreneur success stories
             6. Reddit r/indiehackers - Success stories and revenue reports
             7. GitHub - Open source projects with commercial success
-            8. Hacker News - Startup and SaaS discussions
+            8. Hacker News - Recent startup and SaaS discussions and Show HN posts
+            9. Y Combinator - Recent batch companies and success stories
+            10. TechCrunch - Recent startup funding and success stories
             
             Focus on projects with these characteristics:
             - Monthly recurring revenue (MRR) between $1K-$50K
@@ -61,7 +63,13 @@ class SuccessfulProjectResearcherAgent:
             - Still actively growing and generating revenue
             - Address similar pain points identified in Reddit trend analysis
             
-            IMPORTANT: Match each successful project to specific Reddit pain points and rank them according to the pain point severity/frequency ranking from Reddit analysis.
+            IMPORTANT: 
+            1. MUST find at least 10 the most recent successful micro-SaaS projects
+            2. Match each project to specific Reddit pain points (e.g., "Addresses Pain Point #1: AI Privacy Concerns")
+            3. Rank projects according to Reddit pain point severity/frequency
+            4. If you cannot find enough recent projects, expand search to include older projects but prioritize the most recent ones
+            5. If no related projects exist, explicitly state that no solutions have been found for this market
+            6. Provide detailed information for each project including launch date, revenue, and how it solves Reddit pain points
 
             Analysis criteria for each project:
             
@@ -104,7 +112,7 @@ class SuccessfulProjectResearcherAgent:
             Deliverables:
             - Top 10 successful micro-SaaS projects RANKED BY REDDIT PAIN POINT SEVERITY/FREQUENCY:
               * For each project, specify which Reddit pain point it addresses (e.g., "Addresses Pain Point #1: AI Privacy Concerns")
-              * Launch dates and timeline to success (prioritize 2023-2024 launches)
+              * Launch dates and timeline to success (prioritize most recent launches)
               * Current revenue status and growth trajectory
               * Founder background and team composition
               * Marketing strategies and customer acquisition methods

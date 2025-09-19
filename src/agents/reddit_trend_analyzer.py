@@ -94,8 +94,12 @@ class RedditTrendAnalyzerAgent:
             - Success patterns from existing solutions with dates and sources
             - Competitive gaps and opportunities with specific Reddit post references
             
-            IMPORTANT: Keep the analysis concise and focused. Prioritize the most significant pain points and opportunities. 
-            Limit detailed examples to the top 3-5 most important findings to avoid token limit issues.
+            IMPORTANT: 
+            1. Keep the analysis concise and focused
+            2. Prioritize the most significant pain points and opportunities
+            3. Limit detailed examples to the top 3-5 most important findings to avoid token limit issues
+            4. For each pain point, provide clear, actionable descriptions that can be matched to specific SaaS solutions
+            5. Include specific keywords and phrases that successful projects might use in their marketing
             """,
             agent=self.agent,
             expected_output="""
