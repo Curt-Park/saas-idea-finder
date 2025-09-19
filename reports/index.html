@@ -11,6 +11,7 @@
             margin: 0 auto;
             padding: 20px;
             background-color: #f5f5f5;
+            line-height: 1.6;
         }
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -123,6 +124,219 @@
             padding: 40px;
             color: #666;
         }
+        
+        /* 마크다운 스타일링 */
+        .markdown-content {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: #333;
+        }
+        
+        .markdown-content h1 {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin: 1.5em 0 0.8em 0;
+            padding-bottom: 0.3em;
+            border-bottom: 2px solid #eaecef;
+            color: #24292e;
+        }
+        
+        .markdown-content h2 {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin: 1.3em 0 0.6em 0;
+            padding-bottom: 0.3em;
+            border-bottom: 1px solid #eaecef;
+            color: #24292e;
+        }
+        
+        .markdown-content h3 {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin: 1.2em 0 0.5em 0;
+            color: #24292e;
+        }
+        
+        .markdown-content h4 {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin: 1em 0 0.4em 0;
+            color: #24292e;
+        }
+        
+        .markdown-content h5 {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin: 0.9em 0 0.3em 0;
+            color: #24292e;
+        }
+        
+        .markdown-content h6 {
+            font-size: 1em;
+            font-weight: 600;
+            margin: 0.8em 0 0.3em 0;
+            color: #6a737d;
+        }
+        
+        .markdown-content p {
+            margin: 0.8em 0;
+            line-height: 1.7;
+            color: #24292e;
+        }
+        
+        .markdown-content ul, .markdown-content ol {
+            margin: 0.8em 0;
+            padding-left: 2em;
+        }
+        
+        .markdown-content li {
+            margin: 0.3em 0;
+            line-height: 1.6;
+        }
+        
+        .markdown-content ul li {
+            list-style-type: disc;
+        }
+        
+        .markdown-content ol li {
+            list-style-type: decimal;
+        }
+        
+        .markdown-content ul ul, .markdown-content ol ol, .markdown-content ul ol, .markdown-content ol ul {
+            margin: 0.2em 0;
+        }
+        
+        .markdown-content strong {
+            font-weight: 600;
+            color: #24292e;
+        }
+        
+        .markdown-content em {
+            font-style: italic;
+            color: #24292e;
+        }
+        
+        .markdown-content code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.9em;
+            background-color: #f6f8fa;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            color: #e36209;
+        }
+        
+        .markdown-content pre {
+            background-color: #f6f8fa;
+            border-radius: 6px;
+            font-size: 0.9em;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+            margin: 1em 0;
+        }
+        
+        .markdown-content pre code {
+            background-color: transparent;
+            border: 0;
+            display: inline;
+            line-height: inherit;
+            margin: 0;
+            max-width: auto;
+            overflow: visible;
+            padding: 0;
+            word-wrap: normal;
+            color: #24292e;
+        }
+        
+        .markdown-content blockquote {
+            border-left: 4px solid #dfe2e5;
+            color: #6a737d;
+            padding: 0 1em;
+            margin: 1em 0;
+        }
+        
+        .markdown-content table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin: 1em 0;
+            width: 100%;
+        }
+        
+        .markdown-content table th {
+            background-color: #f6f8fa;
+            border: 1px solid #d0d7de;
+            font-weight: 600;
+            padding: 6px 13px;
+            text-align: left;
+        }
+        
+        .markdown-content table td {
+            border: 1px solid #d0d7de;
+            padding: 6px 13px;
+        }
+        
+        .markdown-content table tr {
+            background-color: #ffffff;
+            border-top: 1px solid #c6cbd1;
+        }
+        
+        .markdown-content table tr:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+        
+        .markdown-content hr {
+            border: 0;
+            border-top: 1px solid #e1e4e8;
+            margin: 2em 0;
+        }
+        
+        .markdown-content a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        
+        .markdown-content a:hover {
+            text-decoration: underline;
+        }
+        
+        .markdown-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin: 1em 0;
+        }
+        
+        /* 인라인 코드와 강조 */
+        .markdown-content p code, .markdown-content li code {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            font-size: 0.9em;
+            padding: 0.2em 0.4em;
+            color: #e36209;
+        }
+        
+        /* 목록 들여쓰기 */
+        .markdown-content ul ul, .markdown-content ol ol, .markdown-content ul ol, .markdown-content ol ul {
+            margin-top: 0.2em;
+            margin-bottom: 0.2em;
+        }
+        
+        /* 번호 목록 스타일 */
+        .markdown-content ol {
+            counter-reset: item;
+        }
+        
+        .markdown-content ol > li {
+            display: block;
+            margin: 0.3em 0;
+        }
+        
+        .markdown-content ol > li:before {
+            content: counter(item) ". ";
+            counter-increment: item;
+            font-weight: 600;
+            color: #24292e;
+        }
     </style>
 </head>
 <body>
@@ -211,7 +425,7 @@
                 if (response.ok) {
                     const markdown = await response.text();
                     const html = await convertMarkdownToHtml(markdown);
-                    content.innerHTML = html;
+                    content.innerHTML = `<div class="markdown-content">${html}</div>`;
                 } else {
                     content.innerHTML = '<div class="loading">Report not found</div>';
                 }
@@ -221,27 +435,84 @@
             }
         }
         
-        // Simple markdown to HTML converter
+        // Enhanced markdown to HTML converter
         async function convertMarkdownToHtml(markdown) {
-            // Basic markdown conversion
-            let html = markdown
-                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-                .replace(/^#### (.*$)/gim, '<h4>$1</h4>')
-                .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
-                .replace(/\*(.*)\*/gim, '<em>$1</em>')
-                .replace(/^- (.*$)/gim, '<li>$1</li>')
-                .replace(/^\d+\. (.*$)/gim, '<li>$1</li>')
-                .replace(/\n\n/gim, '</p><p>')
-                .replace(/\n/gim, '<br>');
+            let html = markdown;
+            
+            // Headers
+            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+            
+            // Bold and italic
+            html = html.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
+            html = html.replace(/\*(.*?)\*/gim, '<em>$1</em>');
+            
+            // Code blocks
+            html = html.replace(/```([\s\S]*?)```/gim, '<pre><code>$1</code></pre>');
+            
+            // Inline code
+            html = html.replace(/`([^`]+)`/gim, '<code>$1</code>');
+            
+            // Links
+            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2">$1</a>');
+            
+            // Horizontal rules
+            html = html.replace(/^---$/gim, '<hr>');
+            
+            // Lists - handle both ordered and unordered
+            const lines = html.split('\n');
+            let inList = false;
+            let listType = '';
+            let result = [];
+            
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                const trimmedLine = line.trim();
+                
+                // Check for list items
+                if (trimmedLine.match(/^[-*+] /) || trimmedLine.match(/^\d+\. /)) {
+                    const isOrdered = trimmedLine.match(/^\d+\. /);
+                    const currentListType = isOrdered ? 'ol' : 'ul';
+                    
+                    if (!inList) {
+                        inList = true;
+                        listType = currentListType;
+                        result.push(`<${listType}>`);
+                    } else if (listType !== currentListType) {
+                        result.push(`</${listType}>`);
+                        listType = currentListType;
+                        result.push(`<${listType}>`);
+                    }
+                    
+                    const content = trimmedLine.replace(/^[-*+] /, '').replace(/^\d+\. /, '');
+                    result.push(`<li>${content}</li>`);
+                } else {
+                    if (inList) {
+                        result.push(`</${listType}>`);
+                        inList = false;
+                        listType = '';
+                    }
+                    result.push(line);
+                }
+            }
+            
+            if (inList) {
+                result.push(`</${listType}>`);
+            }
+            
+            html = result.join('\n');
+            
+            // Paragraphs
+            html = html.replace(/\n\n/gim, '</p><p>');
+            html = html.replace(/\n/gim, '<br>');
             
             // Wrap in paragraphs
             html = '<p>' + html + '</p>';
             
-            // Fix list items
-            html = html.replace(/<li>(.*?)<\/li>/gim, '<ul><li>$1</li></ul>');
-            html = html.replace(/<\/ul><ul>/gim, '');
+            // Clean up empty paragraphs
+            html = html.replace(/<p><\/p>/gim, '');
+            html = html.replace(/<p><br><\/p>/gim, '');
             
             return html;
         }
