@@ -31,45 +31,6 @@
             margin: 10px 0 0 0;
             opacity: 0.9;
         }
-        .pagination {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .pagination h3 {
-            margin: 0 0 15px 0;
-            color: #333;
-        }
-        .page-numbers {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .page-number {
-            display: inline-block;
-            padding: 8px 12px;
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-            text-decoration: none;
-            color: #495057;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        .page-number:hover {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-        .page-number.active {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
         .report-card {
             background: white;
             border-radius: 10px;
@@ -328,25 +289,8 @@
         <p>Daily AI-powered SaaS opportunity analysis</p>
     </div>
     
-    <div class="pagination">
-        <h3>📊 Select Report</h3>
-        <div class="page-numbers" id="pageNumbers">
-            <div class="loading">Loading reports...</div>
-        </div>
-        <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea;">
-            <p style="margin: 0; color: #495057; font-size: 0.9em;">
-                <strong>Want to check reports from all dates?</strong><br>
-                <a href="https://github.com/Curt-Park/saas-idea-finder/tree/main/reports" 
-                   target="_blank" 
-                   style="color: #667eea; text-decoration: none; font-weight: 500;">
-                     Go to GitHub repository reports folder →
-                </a>
-            </p>
-        </div>
-    </div>
-    
     <div class="report-card" id="reportContent">
-        <div class="loading">Select a report to view</div>
+        <div class="loading">Loading report...</div>
     </div>
     
     <div class="footer">
@@ -355,9 +299,6 @@
     </div>
     
     <script>
-        let totalReports = 0;
-        let currentPage = 1;
-
         // marked.js configuration
         marked.setOptions({
             breaks: true,
@@ -366,55 +307,13 @@
             mangle: false
         });
         
-        // Load total reports count
-        async function loadTotalReports() {
-            try {
-                // Since we only have latest-report.md, set totalReports to 1
-                totalReports = 1;
-                generatePageNumbers();
-            } catch (error) {
-                console.error('Error loading total reports:', error);
-                totalReports = 1;
-                generatePageNumbers();
-            }
-        }
-        
-        // Generate page number buttons
-        function generatePageNumbers() {
-            const container = document.getElementById('pageNumbers');
-            container.innerHTML = '';
-            
-            for (let i = 1; i <= totalReports; i++) {
-                const pageBtn = document.createElement('div');
-                pageBtn.className = 'page-number';
-                pageBtn.textContent = i;
-                pageBtn.onclick = () => loadReport(i);
-                container.appendChild(pageBtn);
-            }
-            
-            // Load the first report by default
-            if (totalReports > 0) {
-                loadReport(1);
-            }
-        }
-        
-        // Load report content
-        async function loadReport(pageNumber) {
-            currentPage = pageNumber;
-            
-            // Update active page button
-            document.querySelectorAll('.page-number').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.querySelectorAll('.page-number')[pageNumber - 1]?.classList.add('active');
-            
-            // Show loading
+        // Load report content immediately
+        async function loadReport() {
             const content = document.getElementById('reportContent');
             content.innerHTML = '<div class="loading">Loading report...</div>';
             
             try {
-                const reportFile = 'latest-report.md';
-                const response = await fetch(reportFile);
+                const response = await fetch('latest-report.md');
                 
                 if (response.ok) {
                     const markdown = await response.text();
@@ -433,8 +332,8 @@
             }
         }
         
-        // Initialize
-        loadTotalReports();
+        // Initialize - load report immediately
+        loadReport();
     </script>
 </body>
 </html>
