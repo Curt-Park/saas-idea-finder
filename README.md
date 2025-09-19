@@ -137,7 +137,7 @@ A: No, Reddit API credentials are required for data collection. The tool needs t
 A: The tool analyzes 20 subreddits including r/entrepreneur, r/SaaS, r/smallbusiness, r/productivity, r/webdev, r/startups, r/indiehackers, and many more.
 
 **Q: How much Reddit data is collected?**
-A: The tool collects up to 10 posts per subreddit (hot posts, recent posts, and pain point posts), totaling up to 1,200 posts across all subreddits.
+A: The tool collects up to 10 posts per subreddit (hot posts, weekly top posts, and pain point posts), totaling up to 1,200 posts across all subreddits.
 
 **Q: What format are the reports saved in?**
 A: Reports are saved in Markdown (.md) format with professional formatting, making them easy to read, edit, and share.

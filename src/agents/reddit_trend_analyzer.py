@@ -125,10 +125,10 @@ class RedditTrendAnalyzerAgent:
         hot_posts = self.reddit_scraper.scrape_hot_posts(limit_per_subreddit=10)
         reddit_data["hot_posts"] = hot_posts
 
-        # Get recent posts (reduced limit for token optimization)
-        print("📊 Scraping recent posts...")
-        recent_posts = self.reddit_scraper.scrape_recent_posts(limit_per_subreddit=10)
-        reddit_data["recent_posts"] = recent_posts
+        # Get weekly top posts (reduced limit for token optimization)
+        print("📊 Scraping weekly top posts...")
+        weekly_top_posts = self.reddit_scraper.scrape_weekly_top_posts(limit_per_subreddit=10)
+        reddit_data["weekly_top_posts"] = weekly_top_posts
 
         # Get pain point posts (reduced limit for token optimization)
         print("🔍 Searching for pain points...")

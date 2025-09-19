@@ -139,6 +139,51 @@ class RedditScraper:
 
         return all_posts
 
+    def scrape_weekly_top_posts(self, limit_per_subreddit: int = 10) -> dict[str, list[dict[str, Any]]]:
+        """Scrape weekly top posts from target subreddits.
+
+        Args:
+            limit_per_subreddit: Number of posts to scrape per subreddit
+
+        Returns:
+            Dictionary with subreddit names as keys and lists of post data as values
+        """
+        all_posts = {}
+
+        for subreddit_name in self.subreddits:
+            try:
+                print(f"📊 Scraping weekly top posts from r/{subreddit_name}...")
+                subreddit = self.reddit.subreddit(subreddit_name)
+                posts = []
+
+                # Get top posts from the past week
+                for post in subreddit.top(time_filter="week", limit=limit_per_subreddit):
+                    post_data = {
+                        "title": post.title,
+                        "url": f"https://reddit.com{post.permalink}",
+                        "score": post.score,
+                        "num_comments": post.num_comments,
+                        "created_utc": post.created_utc,
+                        "created_date": datetime.fromtimestamp(post.created_utc).strftime("%Y-%m-%d %H:%M:%S"),
+                        "author": str(post.author) if post.author else "[deleted]",
+                        "selftext": post.selftext[:200] if post.selftext else "",  # Limit text length for token optimization
+                        "subreddit": subreddit_name,
+                        "upvote_ratio": post.upvote_ratio,
+                        "is_self": post.is_self,
+                        "link_flair_text": post.link_flair_text,
+                        "num_awards": post.total_awards_received,
+                    }
+                    posts.append(post_data)
+
+                all_posts[subreddit_name] = posts
+                print(f"✅ Scraped {len(posts)} weekly top posts from r/{subreddit_name}")
+
+            except Exception as e:
+                print(f"❌ Error scraping r/{subreddit_name}: {str(e)}")
+                all_posts[subreddit_name] = []
+
+        return all_posts
+
     def search_posts(self, query: str, limit_per_subreddit: int = 20) -> dict[str, list[dict[str, Any]]]:
         """Search for posts containing specific keywords.
 
