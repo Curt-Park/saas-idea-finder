@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'report/**'
   workflow_run:
     workflows: ["Daily SaaS Analysis"]
     types: [completed]
