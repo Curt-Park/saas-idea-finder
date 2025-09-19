@@ -50,17 +50,19 @@ class CompetitiveLandscapeAnalyzerAgent:
             For each successful project identified, provide a COMPACT analysis with these sections:
             
             **For Each Service:**
-            1. **Strengths** (2-3 key points):
+            1. **Service Name**: [Service Name]
+            2. **Overview**: [Service description]
+            3. **Strengths** (2-3 key points):
                - Unique value propositions
                - Key competitive advantages
                - Market recognition factors
             
-            2. **Weaknesses** (2-3 key points):
+            4. **Weaknesses** (2-3 key points):
                - Feature limitations or gaps
                - User experience issues
                - Pricing or support concerns
             
-            3. **Market Opportunities and Gaps** (2-3 key points):
+            5. **Market Opportunities and Gaps** (2-3 key points):
                - Underserved customer segments
                - Feature gaps in the market
                - Pricing or geographic opportunities
@@ -102,10 +104,11 @@ class CompetitiveLandscapeAnalyzerAgent:
             expected_output="""
             Competitive Landscape Analysis Report:
             For each service (if found):
-            1. **Service Name**: Brief overview
-            2. **Strengths**: 2-3 key competitive advantages
-            3. **Weaknesses**: 2-3 key limitations or gaps
-            4. **Market Opportunities and Gaps**: 2-3 key opportunities
+            1. **Service Name**: Service Name
+            2. **Overview**: Service description
+            3. **Strengths**: 2-3 key competitive advantages
+            4. **Weaknesses**: 2-3 key limitations or gaps
+            5. **Market Opportunities and Gaps**: 2-3 key opportunities
             
             If no services found:
             1. **Reddit Pain Point Analysis**: Key pain points identified

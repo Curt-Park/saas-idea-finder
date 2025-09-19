@@ -102,7 +102,7 @@ The successful micro-SaaS research report includes 10 projects ranked by Reddit 
 **Competitive Landscape Analysis Report:**
 
 1. **Service Name**: **Accerlerlist**
-   - **Overview**: A micro-SaaS that simplifies product management on Amazon by providing tools for listing, repricing, and accounting.
+   **Overview**: A micro-SaaS that simplifies product management on Amazon by providing tools for listing, repricing, and accounting.
 
    **Strengths**:
    - Seamless integration with Amazon and eBay, enhancing user experience.
@@ -120,7 +120,7 @@ The successful micro-SaaS research report includes 10 projects ranked by Reddit 
    - Targeting underserved segments like small sellers who need affordable solutions.
 
 2. **Service Name**: **Gumroad**
-   - **Overview**: A platform that allows creators to sell digital products directly to consumers.
+   **Overview**: A platform that allows creators to sell digital products directly to consumers.
 
    **Strengths**:
    - User-friendly interface that simplifies the selling process for creators.
@@ -138,7 +138,7 @@ The successful micro-SaaS research report includes 10 projects ranked by Reddit 
    - Expanding into international markets to tap into a global audience.
 
 3. **Service Name**: **Notion**
-   - **Overview**: A productivity tool that combines notes, tasks, databases, and wikis in one platform.
+   **Overview**: A productivity tool that combines notes, tasks, databases, and wikis in one platform.
 
    **Strengths**:
    - Highly customizable, allowing users to tailor the platform to their specific needs.
