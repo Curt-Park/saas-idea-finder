@@ -89,7 +89,7 @@
             color: #666;
         }
 
-        /* 목차 스타일 */
+        /* Table of Contents Styles */
         .toc {
             background: #f8f9fa;
             border: 1px solid #e9ecef;
@@ -106,11 +106,11 @@
         }
         .toc ul {
             margin: 0;
-            padding-left: 20px;
+            padding-left: 0;
             list-style: none;
         }
         .toc li {
-            margin: 5px 0;
+            margin: 3px 0;
             line-height: 1.4;
         }
         .toc a {
@@ -118,21 +118,45 @@
             text-decoration: none;
             font-size: 0.9em;
             transition: color 0.2s;
+            display: block;
+            padding: 2px 0;
         }
         .toc a:hover {
             color: #5a6fd8;
             text-decoration: underline;
         }
-        .toc ul ul {
-            margin-top: 5px;
+        .toc .toc-h1 {
+            font-weight: 600;
+            font-size: 1em;
+            padding-left: 0;
+        }
+        .toc .toc-h2 {
+            font-weight: 500;
+            font-size: 0.95em;
             padding-left: 15px;
         }
-        .toc ul ul a {
+        .toc .toc-h3 {
+            font-weight: 400;
+            font-size: 0.9em;
+            padding-left: 30px;
+        }
+        .toc .toc-h4 {
+            font-weight: 400;
             font-size: 0.85em;
-            color: #6c757d;
+            padding-left: 45px;
+        }
+        .toc .toc-h5 {
+            font-weight: 400;
+            font-size: 0.8em;
+            padding-left: 60px;
+        }
+        .toc .toc-h6 {
+            font-weight: 400;
+            font-size: 0.75em;
+            padding-left: 75px;
         }
 
-        /* GitHub 스타일 마크다운 */
+        /* GitHub Style Markdown */
         .markdown-content {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.7;
@@ -317,7 +341,7 @@
             margin: 1em 0;
         }
 
-        /* 인라인 코드 */
+        /* Inline Code */
         .markdown-content p code, .markdown-content li code {
             background-color: rgba(175, 184, 193, 0.2);
             border-radius: 6px;
@@ -353,7 +377,7 @@
         let totalReports = 0;
         let currentPage = 1;
 
-        // marked.js 설정
+        // marked.js configuration
         marked.setOptions({
             breaks: true,
             gfm: true,
@@ -400,7 +424,7 @@
             }
         }
 
-        // 목차 생성 함수
+        // Generate table of contents
         function generateTableOfContents(markdown) {
             const lines = markdown.split('\n');
             const headers = [];
@@ -417,19 +441,19 @@
 
             if (headers.length === 0) return '';
 
-            let tocHtml = '<div class="toc"><h3>📋 목차</h3><ul>';
+            let tocHtml = '<div class="toc"><h3>Table of Contents</h3><ul>';
 
             headers.forEach(header => {
-                const indent = '  '.repeat(header.level - 1);
-                const linkText = header.text.replace(/[⏱️🚀]/g, '').trim();
-                tocHtml += `${indent}<li><a href="#${header.id}" onclick="scrollToHeader('${header.id}')">${linkText}</a></li>\n`;
+                const linkText = header.text.replace(/[📋⏱️🚀🎯📊]/g, '').trim();
+                const tocClass = `toc-h${header.level}`;
+                tocHtml += `<li><a href="#${header.id}" onclick="scrollToHeader('${header.id}')" class="${tocClass}">${linkText}</a></li>\n`;
             });
 
             tocHtml += '</ul></div>';
             return tocHtml;
         }
 
-        // 헤더로 스크롤하는 함수
+        // Scroll to header function
         function scrollToHeader(headerId) {
             const element = document.getElementById(headerId);
             if (element) {
@@ -437,7 +461,7 @@
             }
         }
 
-        // 마크다운에 ID 추가하는 함수
+        // Add IDs to headers function
         function addIdsToHeaders(html) {
             return html.replace(/<(h[1-6])[^>]*>(.*?)<\/h[1-6]>/g, (match, tag, content) => {
                 const id = 'header-' + Math.random().toString(36).substr(2, 9);
@@ -466,16 +490,16 @@
                 if (response.ok) {
                     const markdown = await response.text();
 
-                    // 목차 생성
+                    // Generate table of contents
                     const toc = generateTableOfContents(markdown);
 
-                    // marked.js를 사용하여 마크다운을 HTML로 변환
+                    // Convert markdown to HTML using marked.js
                     let html = marked.parse(markdown);
 
-                    // 헤더에 ID 추가
+                    // Add IDs to headers
                     html = addIdsToHeaders(html);
 
-                    // 목차와 내용을 함께 표시
+                    // Display table of contents and content together
                     content.innerHTML = `${toc}<div class="markdown-content">${html}</div>`;
                 } else {
                     content.innerHTML = '<div class="loading">Report not found</div>';
