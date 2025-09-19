@@ -68,18 +68,10 @@ class SaasIdeaFinderCrew:
 
         # Step 2: Research successful projects (using Reddit trend analysis summary)
         print("💰 Step 2: Researching successful micro-SaaS projects based on Reddit trends...")
-        try:
-            successful_projects = self.successful_project_researcher.research_successful_projects(
-                reddit_result["reddit_trend_analysis"]
-            )
-            print("✅ Successful projects research completed")
-        except Exception as e:
-            print(f"❌ Error in successful projects research: {e}")
-            # Create fallback result
-            successful_projects = {
-                "successful_projects_research": "Error occurred during research. Please check the logs.",
-                "status": "error",
-            }
+        successful_projects = self.successful_project_researcher.research_successful_projects(
+            reddit_result["reddit_trend_analysis"]
+        )
+        print("✅ Successful projects research completed")
 
         # Step 3: Competitive landscape analysis
         print("🏢 Step 3: Analyzing competitive landscape...")

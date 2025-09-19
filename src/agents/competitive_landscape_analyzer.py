@@ -38,6 +38,15 @@ class CompetitiveLandscapeAnalyzerAgent:
             
             Research data: {research_data}
             
+            IMPORTANT: 
+            1. If no successful projects were found in the research data, analyze the Reddit pain points and suggest potential service ideas instead
+            2. If successful projects were found, analyze their competitive landscape
+            3. If research data is empty or contains errors, focus on analyzing the market gaps identified in Reddit trends
+            
+            ANALYSIS APPROACH:
+            A. If successful projects were found: Analyze their competitive landscape
+            B. If no successful projects found: Analyze Reddit pain points and suggest service ideas
+            
             For each successful project identified, perform detailed competitive analysis:
             
             1. Service Overview Analysis:
@@ -95,22 +104,43 @@ class CompetitiveLandscapeAnalyzerAgent:
             - Geographic or industry-specific gaps
             
             Deliverables:
-            - Detailed competitive analysis for each service
+            - Detailed competitive analysis for each service (if found)
             - Market gap identification
             - Improvement opportunity matrix
             - Competitive advantage recommendations
             - Market entry strategy suggestions
-            """,
+            - Service idea suggestions (if no existing services found)
+            
+            B. If no successful projects found, provide SERVICE IDEA SUGGESTIONS:
+            
+            1. Reddit Pain Point Analysis:
+               - Identify the most critical pain points from Reddit analysis
+               - Assess market opportunity for each pain point
+               - Evaluate technical feasibility for solopreneur implementation
+            
+            2. Service Idea Suggestions:
+               - For each major pain point, suggest 2-3 potential service ideas
+               - Include target audience, core features, and business model
+               - Explain how each idea addresses the specific Reddit pain point
+               - Note: These are SUGGESTED IDEAS, not existing services
+            
+            3. Market Gap Analysis:
+               - Explain why no existing solutions were found
+               - Identify barriers to entry for these markets
+               - Suggest validation approaches for proposed ideas
+            """,  # noqa
             agent=self.agent,
             expected_output="""
             Competitive Landscape Analysis Report:
-            1. Service overview and positioning
-            2. Strengths and competitive advantages
-            3. Weaknesses and improvement areas
+            1. Service overview and positioning (if services found)
+            2. Strengths and competitive advantages (if services found)
+            3. Weaknesses and improvement areas (if services found)
             4. Market opportunities and gaps
-            5. Competitive positioning analysis
+            5. Competitive positioning analysis (if services found)
             6. Improvement opportunity matrix
             7. Market entry strategy recommendations
+            8. Service idea suggestions (if no existing services found)
+            9. Reddit pain point analysis and market gap identification
             """,
         )
 

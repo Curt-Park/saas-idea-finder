@@ -64,12 +64,13 @@ class SuccessfulProjectResearcherAgent:
             - Address similar pain points identified in Reddit trend analysis
             
             IMPORTANT: 
-            1. MUST find at least 10 the most recent successful micro-SaaS projects
+            1. MUST find at least 10 successful micro-SaaS projects that address Reddit pain points
             2. Match each project to specific Reddit pain points (e.g., "Addresses Pain Point #1: AI Privacy Concerns")
             3. Rank projects according to Reddit pain point severity/frequency
-            4. If you cannot find enough recent projects, expand search to include older projects but prioritize the most recent ones
-            5. If no related projects exist, explicitly state that no solutions have been found for this market
+            4. If you cannot find enough projects addressing specific pain points, search for general successful micro-SaaS projects
+            5. If no related projects exist for a specific pain point, explicitly state "No existing solutions found for this pain point"
             6. Provide detailed information for each project including launch date, revenue, and how it solves Reddit pain points
+            7. If fewer than 10 projects are found, clearly state the number found and explain the search limitations
 
             Analysis criteria for each project:
             
