@@ -99,8 +99,14 @@ class ServiceIntegratorAgent:
             task = self.create_service_integration_task(analysis_data)
             result = self.agent.execute_task(task)
             
+            # result가 문자열인 경우와 객체인 경우 모두 처리
+            if hasattr(result, 'raw'):
+                service_integration = result.raw
+            else:
+                service_integration = str(result)
+            
             return {
-                "service_integration": result.raw,
+                "service_integration": service_integration,
                 "status": "success"
             }
         except Exception as e:
