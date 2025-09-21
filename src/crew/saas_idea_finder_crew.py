@@ -15,6 +15,7 @@ from ..agents.mvp_feature_suggester import MvpFeatureSuggesterAgent
 from ..agents.problem_analyzer import ProblemAnalyzerAgent
 from ..agents.reddit_trend_analyzer import RedditTrendAnalyzerAgent
 from ..agents.revenue_analyzer import RevenueAnalyzerAgent
+from ..agents.service_integrator import ServiceIntegratorAgent
 from ..agents.successful_project_researcher import SuccessfulProjectResearcherAgent
 
 
@@ -39,6 +40,7 @@ class SaasIdeaFinderCrew:
         self.mvp_feature_suggester = MvpFeatureSuggesterAgent(self.openai_api_key, model, temperature)
         self.problem_analyzer = ProblemAnalyzerAgent(self.openai_api_key, model, temperature)
         self.revenue_analyzer = RevenueAnalyzerAgent(self.openai_api_key, model, temperature)
+        self.service_integrator = ServiceIntegratorAgent(self.openai_api_key, model, temperature)
 
         # Crew setup for successful project analysis
         self.crew = Crew(
@@ -111,6 +113,21 @@ class SaasIdeaFinderCrew:
         step_times["revenue_analysis"] = time.time() - step_start
         print(f"⏱️  Revenue analysis completed in {step_times['revenue_analysis']:.1f} seconds")
 
+        # Step 7: Service integration
+        print("🔗 Step 7: Integrating all analysis results by service...")
+        step_start = time.time()
+        integration_data = {
+            "reddit_trends": reddit_result,
+            "successful_projects": successful_projects,
+            "competitive_analysis": competitive_result,
+            "mvp_suggestions": mvp_result,
+            "problem_analysis": problem_result,
+            "revenue_analysis": revenue_result,
+        }
+        service_integration = self.service_integrator.integrate_services(integration_data)
+        step_times["service_integration"] = time.time() - step_start
+        print(f"⏱️  Service integration completed in {step_times['service_integration']:.1f} seconds")
+
         # Calculate total time
         total_time = time.time() - total_start_time
         step_times["total_time"] = total_time
@@ -123,6 +140,7 @@ class SaasIdeaFinderCrew:
             "mvp_suggestions": mvp_result,
             "problem_analysis": problem_result,
             "revenue_analysis": revenue_result,
+            "service_integration": service_integration,
             "step_times": step_times,
             "status": "completed",
         }
@@ -158,13 +176,18 @@ class SaasIdeaFinderCrew:
 - **MVP Feature Suggestions**: {step_times.get("mvp_suggestions", 0):.1f} seconds
 - **Problem Analysis**: {step_times.get("problem_analysis", 0):.1f} seconds
 - **Revenue Analysis**: {step_times.get("revenue_analysis", 0):.1f} seconds
+- **Service Integration**: {step_times.get("service_integration", 0):.1f} seconds
 
 ### Total Analysis Time
 - **Overall Duration**: {total_time:.1f} seconds ({total_time / 60:.1f} minutes)
-- **Average Step Time**: {total_time / 6:.1f} seconds per step
+- **Average Step Time**: {total_time / 7:.1f} seconds per step
 
 """
 
+        # 서비스별 통합 리포트 생성
+        service_integration = analysis_result.get("service_integration", {})
+        services_analysis = service_integration.get("service_integration", "Service integration not available")
+        
         report = f"""
 # Successful Project Analysis Report
 
@@ -181,19 +204,7 @@ class SaasIdeaFinderCrew:
 {analysis_result.get("reddit_trends", {}).get("reddit_trend_analysis", "Not available")}
 
 ### 2. Successful Projects Research
-{analysis_result.get("successful_projects", {}).get("successful_projects_research", "Not available")}
-
-### 3. Competitive Landscape Analysis
-{analysis_result.get("competitive_analysis", {}).get("competitive_analysis", "Not available")}
-
-### 4. MVP Feature Suggestions
-{analysis_result.get("mvp_suggestions", {}).get("mvp_suggestions", "Not available")}
-
-### 5. Problem Analysis
-{analysis_result.get("problem_analysis", {}).get("problem_analysis", "Not available")}
-
-### 6. Revenue Analysis
-{analysis_result.get("revenue_analysis", {}).get("revenue_analysis", "Not available")}
+{services_analysis}
 
 ## 🚀 Next Steps Recommendations
 1. Validate the suggested improvements with potential customers
