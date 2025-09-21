@@ -187,7 +187,7 @@ class SaasIdeaFinderCrew:
         # 서비스별 통합 리포트 생성
         service_integration = analysis_result.get("service_integration", {})
         services_analysis = service_integration.get("service_integration", "Service integration not available")
-        
+
         report = f"""
 # Successful Project Analysis Report
 

@@ -17,13 +17,9 @@ class ServiceIntegratorAgent:
         self.openai_api_key = openai_api_key
         self.model = model
         self.temperature = temperature
-        
-        self.llm = ChatOpenAI(
-            model=model,
-            temperature=temperature,
-            api_key=openai_api_key
-        )
-        
+
+        self.llm = ChatOpenAI(model=model, temperature=temperature, api_key=openai_api_key)
+
         self.agent = Agent(
             role="Service Integration Specialist",
             goal="Integrate all analysis results for each service into comprehensive service profiles",
@@ -32,16 +28,19 @@ class ServiceIntegratorAgent:
             and creating unified, actionable service profiles that provide complete insights for each service.""",
             verbose=True,
             allow_delegation=False,
-            llm=self.llm
+            llm=self.llm,
         )
 
     def create_service_integration_task(self, analysis_data: dict) -> Task:
         """Create a task for integrating all analysis results by service."""
+        # Summarize context to pass to the task
+        summarized_data = self._summarize_analysis_data(analysis_data)
+
         return Task(
             description=f"""
             Integrate all analysis results for each service into comprehensive service profiles:
             
-            Analysis data: {analysis_data}
+            Summarized analysis data: {summarized_data}
             
             For each service identified in the analysis, create a comprehensive profile that includes:
             
@@ -90,27 +89,63 @@ class ServiceIntegratorAgent:
             12. **MVP Feature Suggestions**: Suggested improvements
             13. **Key Implementation Challenges**: Implementation challenges
             14. **Revenue Analysis**: Revenue potential and viability
-            """
+            """,
         )
+
+    def _summarize_analysis_data(self, analysis_data: dict) -> str:
+        """Summarize analysis data to reduce context length."""
+        try:
+            # Reddit trend analysis summary
+            reddit_trends = analysis_data.get("reddit_trends", {})
+            reddit_summary = reddit_trends.get("reddit_trend_analysis", "")
+
+            # Successful Projects summary
+            successful_projects = analysis_data.get("successful_projects", {})
+            projects_summary = successful_projects.get("successful_projects_research", "")
+
+            # Competitive Analysis summary
+            competitive = analysis_data.get("competitive_analysis", {})
+            competitive_summary = competitive.get("competitive_analysis", "")
+
+            # MVP Suggestions summary
+            mvp = analysis_data.get("mvp_suggestions", {})
+            mvp_summary = mvp.get("mvp_suggestions", "")
+
+            # Problem Analysis summary
+            problem = analysis_data.get("problem_analysis", {})
+            problem_summary = problem.get("problem_analysis", "")
+
+            # Revenue Analysis summary
+            revenue = analysis_data.get("revenue_analysis", {})
+            revenue_summary = revenue.get("revenue_analysis", "")
+
+            return f"""
+REDDIT TRENDS SUMMARY:
+{reddit_summary}
+
+SUCCESSFUL PROJECTS SUMMARY:
+{projects_summary}
+
+COMPETITIVE ANALYSIS SUMMARY:
+{competitive_summary}
+
+MVP SUGGESTIONS SUMMARY:
+{mvp_summary}
+
+PROBLEM ANALYSIS SUMMARY:
+{problem_summary}
+
+REVENUE ANALYSIS SUMMARY:
+{revenue_summary}
+"""
+        except Exception as e:
+            return f"Error summarizing analysis data: {str(e)}"
 
     def integrate_services(self, analysis_data: dict) -> dict:
         """Integrate all analysis results for each service."""
-        try:
-            task = self.create_service_integration_task(analysis_data)
-            result = self.agent.execute_task(task)
-            
-            # result가 문자열인 경우와 객체인 경우 모두 처리
-            if hasattr(result, 'raw'):
-                service_integration = result.raw
-            else:
-                service_integration = str(result)
-            
-            return {
-                "service_integration": service_integration,
-                "status": "success"
-            }
-        except Exception as e:
-            return {
-                "service_integration": f"Error in service integration: {str(e)}",
-                "status": "error"
-            }
+        task = self.create_service_integration_task(analysis_data)
+        result = self.agent.execute_task(task)
+
+        service_integration = result.raw if hasattr(result, "raw") else str(result)
+
+        return {"service_integration": service_integration, "status": "success"}
