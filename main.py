@@ -67,18 +67,24 @@ def main():
         print(summary)
 
         # Create report directory if it doesn't exist
-        report_dir = "report"
+        report_dir = "reports"
         os.makedirs(report_dir, exist_ok=True)
 
         # Generate timestamp-based filename
         timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
         md_file = os.path.join(report_dir, f"{timestamp}.md")
+        latest_file = os.path.join(report_dir, "latest-report.md")
 
-        # Save markdown file
+        # Save markdown file with timestamp
         with open(md_file, "w", encoding="utf-8") as f:
             f.write(summary)
 
+        # Also save as latest-report.md
+        with open(latest_file, "w", encoding="utf-8") as f:
+            f.write(summary)
+
         print(f"\n💾 Detailed results saved to: '{md_file}'")
+        print(f"�� Latest report also saved to: '{latest_file}'")
 
     except Exception as e:
         print(f"❌ An error occurred: {str(e)}")

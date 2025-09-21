@@ -47,20 +47,6 @@ jobs:
       run: |
         python main.py --model gpt-4o-mini --temperature 0.3
         
-    - name: Create reports directory
-      run: mkdir -p reports
-      
-    - name: Copy latest report to reports directory
-      run: |
-        LATEST_REPORT=$(ls -t report/*.md | head -n 1)
-        if [ -n "$LATEST_REPORT" ]; then
-          cp "$LATEST_REPORT" reports/latest-report.md
-          echo "Report copied: $LATEST_REPORT"
-        else
-          echo "No report found"
-          exit 1
-        fi
-        
     - name: Commit and push reports
       uses: offensive-vk/auto-commit-push@v8
       with:
